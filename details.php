@@ -57,6 +57,15 @@
 			<label for="detail-director" >R&eacute;alisateur</label>
 			<input type="text" id="detail-director" value="<?php echo htmlentities( $item->director );?>">
 			<?php endif;?>
+			<div id="detail-rating" >
+				<span class="left">Note</span>
+				<?php for( $i = 0 ; $i < $item->rating ; $i++ ): ?>
+				<span class="icon icon-rating"></span>
+				<?php endfor; ?>
+				<?php for( $i = 0 ; $i < ( 10 - $item->rating ) ; $i++ ): ?>
+				<span class="icon icon-rating-disable"></span>
+				<?php endfor; ?>
+			</div>
 		</div>
 		<div class="form-body">
 			<div class="synopsis" id="detail-summary"><?php echo htmlentities( $item->synopsis );?></div>

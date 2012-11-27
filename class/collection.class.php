@@ -40,6 +40,7 @@ class Video extends Item
 	public $trailer;
 	public $actors = array();
 	public $comment;
+	public $rating = 0;
 
 	public function getActorList()
 	{
@@ -85,6 +86,7 @@ class VideoCollection extends Collection
 				);
 			}
 		}
+		$film->rating = $itemXML['rating'];
 		$film->_isInit = true;
 		return $film;
 	}

@@ -1,4 +1,3 @@
 #!/bin/bash
 
-#montage -background none icons/*.png -tile 5x -geometry +4+4 PNG32:icons.png
-montage -background white icons/*.png -tile 5x -geometry +4+4 PNG32:icons.png
+montage -background transparent PNG32:icons/*.png -tile 5x -geometry '+4+4' PNG32:icons.png

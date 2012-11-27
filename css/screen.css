@@ -298,6 +298,10 @@ label {
 	display:inline-block;
 }
 
+#detail-rating {
+	margin:5px;
+}
+
 form div label, input.clear {
 	display:inline-block;
 	clear:both;
@@ -391,16 +395,26 @@ span.icon-music {
 */
 
 span.icon-video {
-	background-position:-28px -28px;
+	background-position:-4px -4px;
 }
 
 span.icon-move {
-	background-position:-52px -28px;
+	background-position:-4px -24px;
 	cursor:move;
 }
 
 span.icon-close {
-	background-position:-4px -52px;
+	background-position:-24px -24px;
+}
+
+span.icon-rating {
+	background-position:-44px -24px;
+}
+
+span.icon-rating-disable {
+	background-position:-44px -24px;
+	opacity: 0.25;
+	color:Cornsilk;
 }
 /*
 
@@ -447,4 +461,10 @@ span.collection-data {
 p {
 	margin: 0 0 5px 0;
 	padding: 0;
+}
+
+.left
+{
+	float:left;
+	margin: 0 10px 0 0;
 }
