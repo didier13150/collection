@@ -255,17 +255,23 @@ div.title {
 div {
 	margin:0;
 }
-img.loader{
+
+img.loader, img.mainloader {
+	width: 400px;
+	height: 400px;
+}
+
+img.loader {
 	margin-left: 25px;
 	margin-right: 25px;
 }
-img.mainloader{
+img.mainloader {
 	margin-left: auto;
 	margin-right: auto;
 }
 
 
-div#popup{
+div#popup {
 	position:absolute;
 	width:650px;
 	top:50px;
@@ -414,7 +420,7 @@ span.icon-rating {
 span.icon-rating-disable {
 	background-position:-44px -24px;
 	opacity: 0.25;
-	color:Cornsilk;
+	/*color:Cornsilk;*/
 }
 /*
 

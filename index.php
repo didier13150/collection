@@ -55,6 +55,7 @@
 		<div id='details'></div>
 	</div>
 	<article>
+		<img class="mainloader" id="loader-img" src="img/ajax-loader.gif" alt="Please, Wait"/>
 	</article>
 	<footer>
 		<p>Designed by Didier FABERT&nbsp;&copy;&nbsp;|&nbsp;Valid HTML5 and CSS3</p>

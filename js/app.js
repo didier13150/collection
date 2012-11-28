@@ -32,6 +32,7 @@ function bindThumbnail( item ) {
 }
 
 function bindTab( id ) {
+	$( '#tab-' + id ).attr( 'href', '#' );
 	$( '#tab-' + id ).on(
 		'click',
 		function() {
@@ -56,12 +57,9 @@ function setMainOpacity( opacity )
 
 function getItem( item )
 {
-	var marginLoader = ( parseInt( $('#popup').width() ) - 600 ) / 2;
+	setLoader( '#details', '#popup', 'loader' );
 	$('#popup').show();
 	setMainOpacity( 0.15 );
-	$('#details').html( '<img class="loader" src="img/ajax-loader.gif" alt="Please, Wait"/>' );
-	$('.mainloader').css( 'margin-left', marginLoader + 'px' );
-	$('.mainloader').css( 'margin-right', marginLoader + 'px' );
 	var arg = '';
 	if( parseInt( item ) >= 0 ) {
 		arg = '?collection=' + collection + '&item=' + item;
@@ -81,10 +79,7 @@ function getItem( item )
 
 function getCollection()
 {
-	var marginLoader = ( parseInt( $(window).width() ) - 600 ) / 2;
-	$('article').html( '<img class="mainloader" src="img/ajax-loader.gif" alt="Please, Wait"/>' );
-	$('.mainloader').css( 'margin-left', marginLoader + 'px' );
-	$('.mainloader').css( 'margin-right', marginLoader + 'px' );
+	setLoader( 'article', window, 'mainloader' );
 	$('.item').off( 'click' );
 	$('.tab').removeClass( 'current-tab' );
 	$('#tab-' + collection ).addClass( 'current-tab' );
@@ -102,6 +97,16 @@ function getCollection()
 			alert( 'Error reported when trying to get collection ' + collection );
 		}
 	});
+}
+
+function setLoader( element, parent, loaderClass )
+{
+	$(element).html( '<img class="' + loaderClass + '" src="img/ajax-loader.gif" alt="Please, Wait..."/>' );
+	var loaderWidth = $( '.' + loaderClass ).width();
+	var loaderHeight = $( '.' + loaderClass ).height();
+	var margin = ( parseInt( $(parent).width() ) - loaderWidth ) / 2;
+	$( '.' + loaderClass ).css( 'margin-left', margin + 'px' );
+	$( '.' + loaderClass ).css( 'margin-right', margin + 'px' );
 }
 
 function resizeArticle()
