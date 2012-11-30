@@ -32,7 +32,6 @@ function bindThumbnail( item ) {
 }
 
 function bindTab( id ) {
-	$( '#tab-' + id ).attr( 'href', '#' );
 	$( '#tab-' + id ).on(
 		'click',
 		function() {
@@ -41,6 +40,16 @@ function bindTab( id ) {
 		}
 	);
 }
+
+function bindPage( id ) {
+	$( '#page-' + id ).on(
+		'click',
+		function() {
+			getCollection( id );
+		}
+	);
+}
+
 function setMainOpacity( opacity )
 {
 	if ( parseInt( opacity ) == 1 ) {
@@ -77,7 +86,7 @@ function getItem( item )
 	});
 }
 
-function getCollection()
+function getCollection( offset )
 {
 	setLoader( 'article', window, 'mainloader' );
 	$('.item').off( 'click' );
@@ -86,6 +95,9 @@ function getCollection()
 	var arg = '';
 	if( parseInt( collection ) >= 0 ) {
 		arg = '?collection=' + collection;
+		if ( parseInt( offset ) >= 0 ) {
+			arg += '&start=' + offset;
+		}
 	}
 	$.ajax({
 		url: 'collection.php' + arg,
@@ -111,7 +123,7 @@ function setLoader( element, parent, loaderClass )
 
 function resizeArticle()
 {
-	var articleHeight = $(window).height() - 180;
+	var articleHeight = $(window).height() - 156;
 	if ( articleHeight < 160 )
 	{
 		articleHeight = 160;

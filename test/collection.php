@@ -1,10 +1,11 @@
 <?php
 	include_once( '../class/collection.class.php' );
-	include_once( 'settings.php' );
+	include_once( '../class/item.class.php' );
+	include_once( '../settings.php' );
 
-	$collectionID = 0;
+	$collectionID = 3;
 
-	$collection = new VideoCollection();
+	$collection = new SeriesCollection();
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
 		$error =  $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
@@ -19,10 +20,12 @@
 	}
 
 	//$i = 0;
-	foreach( $collection->getItems() as $film )
+	foreach( $collection->getItems() as $item )
 	{
-		echo $film->id . "->" . $film->title . "\n";
-		//if ( $i > 10 ) break;
-		//$i++;
+		echo $item->id . "->" . $item->title . "\n";
+		foreach( $item->getEpisodeList() as $episode )
+		{
+			echo "\t$episode\n";
+		}
 	}
 ?>

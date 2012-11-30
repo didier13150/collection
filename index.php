@@ -46,7 +46,8 @@
 		<?php endforeach;?>
 	</nav>
 	<div id="popup">
-		<p>Collection - D&eacute;tails
+		<p>
+			<span id="popup-title">Collection - D&eacute;tails</span>
 			<span class="right">
 				<span class="icon icon-move"></span>
 				<span class="icon icon-close"></span>

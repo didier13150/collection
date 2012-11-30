@@ -3,6 +3,9 @@
 		0 => array(
 			// Title on tab
 			'title' => 'Films',
+			// GCStar collection type
+			// Can be 'film' or 'series' for now
+			'type' => 'film',
 			// GCStar collection file
 			'file' => '/data/video/films.gcs',
 			// Directory of thumbnails
@@ -11,6 +14,8 @@
 		1 => array(
 			// Title on tab
 			'title' => 'Animations',
+			// GCStar collection type
+			'type' => 'film',
 			// GCStar collection file
 			'file' => '/data/video/animations.gcs',
 			// Directory of thumbnails
@@ -19,6 +24,8 @@
 		2 => array(
 			// Title on tab
 			'title' => 'Spectacles',
+			// GCStar collection type
+			'type' => 'film',
 			// GCStar collection file
 			'file' => '/data/video/spectacles.gcs',
 			// Directory of thumbnails
@@ -27,6 +34,8 @@
 		3 => array(
 			// Title on tab
 			'title' => 'Séries',
+			// GCStar collection type
+			'type' => 'series',
 			// GCStar collection file
 			'file' => '/data/video/series.gcs',
 			// Directory of thumbnails
@@ -48,4 +57,10 @@
 	 * Size of thumbnail on detail popup
 	 */
 	$DETAIL_SIZE = 4;
+
+	/*
+	 * Number of item per page
+	 */
+	$NB_ITEM_PER_PAGE = 40;
+
 ?>

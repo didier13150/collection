@@ -1,16 +1,38 @@
 <?php
 	include_once( 'class/collection.class.php' );
+	include_once( 'class/item.class.php' );
 	include_once( 'settings.php' );
 
 	$collectionID = 0;
-	$error = null;
+	$start = 0;
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
 		$collectionID = $_GET['collection'];
 	}
+	if ( isset( $_GET['start'] ) and ! empty( $_GET['start'] ) )
+	{
+		$start = $_GET['start'];
+	}
 	ob_start();
 
-	$collection = new VideoCollection();
+	// page count begins at 1
+	//$start--;
+	$start *= $NB_ITEM_PER_PAGE;
+	$collection = null;
+	if( $COLLECTIONS[$collectionID]['type'] == 'film' )
+	{
+		$collection = new FilmsCollection();
+	}
+	elseif( $COLLECTIONS[$collectionID]['type'] == 'series' )
+	{
+		$collection = new SeriesCollection();
+	}
+
+	if( ! isset( $collection ) )
+	{
+		echo $COLLECTIONS[$collectionID]['type'] . " is not a valid type !";
+		return 127;
+	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
 		echo $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
@@ -26,17 +48,30 @@
 		echo "Could not load collection !";
 		return 127;
 	}
-	$items = $collection->getItems();
-	$maxItem = count( $items );
+	$items = $collection->getItems( $start, $NB_ITEM_PER_PAGE );
+	$maxItem = $collection->count();
 ?>
 <script language="javascript">
-			availableItems = new Array();
 			<?php foreach( $items as $id => $film ):?>
 			bindThumbnail( '<?php echo $film->id;?>' );
 			<?php endforeach;?>
+			<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
+			bindPage( '<?php echo $i;?>' );
+			<?php endfor;?>
 			resizeArticle();
 </script>
 <p>
+	<span>Page
+	<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
+		<?php if ( $i != 0 ) echo "|";?>
+
+		<?php if( ( $i * $NB_ITEM_PER_PAGE ) == $start ):?>
+			<span class="page-selected">&nbsp;<?php echo $i;?>&nbsp;</span>
+		<?php else:?>
+			&nbsp;<a href="#" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
+		<?php endif;?>
+	<?php endfor;?>
+	<span>
 	<span class="right collection-data"><?php echo $maxItem;?> &eacute;l&eacute;ment<?php if ( count( $items ) > 1 ) echo 's';?> dans la collection</span>
 </p>
 <div id="thumbnails">
