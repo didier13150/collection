@@ -5,6 +5,8 @@
 
 	$collectionID = 0;
 	$start = 0;
+	$sort = 'title';
+
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
 		$collectionID = $_GET['collection'];
@@ -12,6 +14,10 @@
 	if ( isset( $_GET['start'] ) and ! empty( $_GET['start'] ) )
 	{
 		$start = $_GET['start'];
+	}
+	if ( isset( $_GET['sort'] ) and ! empty( $_GET['sort'] ) )
+	{
+		$sort = $_GET['sort'];
 	}
 	ob_start();
 
@@ -48,6 +54,7 @@
 		echo "Could not load collection !";
 		return 127;
 	}
+	$collection->sort( $sort );
 	$items = $collection->getItems( $start, $NB_ITEM_PER_PAGE );
 	$maxItem = $collection->count();
 ?>

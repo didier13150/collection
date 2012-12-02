@@ -7,6 +7,8 @@ abstract class Collection
 	protected $_thumbs_dir = null;
 	protected $_items;
 
+    static $sortKey;
+
 	public function setFilename( $filename )
 	{
 		if( @file_exists( $filename ) )
@@ -108,6 +110,24 @@ abstract class Collection
 	{
 		return count( $this->_items );
 	}
+
+	public function sort( $key )
+	{
+    	self::$sortKey = $key;
+    	usort( $this->_items, array( __CLASS__, 'sorter' ) );
+
+	}
+
+    public static function sorter( $a, $b )
+    {
+		if ( is_int( $a->{self::$sortKey} ) )
+		{
+			if($a == $b) return 0;
+			elseif( $a > $b ) return 1;
+			return -1;
+		}
+    	return strcasecmp( $a->{self::$sortKey}, $b->{self::$sortKey} );
+    }
 }
 
 /*
@@ -168,7 +188,7 @@ class SeriesCollection extends Collection
 {
 	protected function getItemsFromXML( $itemXML )
 	{
-		$id = $itemXML['id'];
+		$id = intval( $itemXML['id'] );
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new SeriesItem();
 		$item->id = $id;
@@ -192,7 +212,7 @@ class SeriesCollection extends Collection
 			foreach ( $episodes->line as $data )
 			{
 				$item->episodes[] = array(
-					'id' => $data->col[0],
+					'id' => intval( $data->col[0] ),
 					'name' => $data->col[1],
 				);
 			}
@@ -251,7 +271,7 @@ class FilmsCollection extends Collection
 {
 	protected function getItemsFromXML( $itemXML )
 	{
-		$id = $itemXML['id'];
+		$id = intval( $itemXML['id'] );
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new FilmItem();
 		$item->id = $id;

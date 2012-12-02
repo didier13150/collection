@@ -3,29 +3,73 @@
 	include_once( '../class/item.class.php' );
 	include_once( '../settings.php' );
 
-	$collectionID = 3;
+	$collectionID = 0;
+	$start = 0;
+	$sort = 'title';
 
-	$collection = new SeriesCollection();
+	// Get Command line options. Only with CLI.
+	if (PHP_SAPI === 'cli')
+	{
+		parse_str( implode( '&', array_slice( $argv, 1 ) ), $_GET );
+	}
+
+	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
+	{
+		$collectionID = $_GET['collection'];
+	}
+	if ( isset( $_GET['start'] ) and ! empty( $_GET['start'] ) )
+	{
+		$start = $_GET['start'];
+	}
+	if ( isset( $_GET['sort'] ) and ! empty( $_GET['sort'] ) )
+	{
+		$sort = $_GET['sort'];
+	}
+
+	$collection = null;
+	if( $COLLECTIONS[$collectionID]['type'] == 'film' )
+	{
+		$collection = new FilmsCollection();
+	}
+	elseif( $COLLECTIONS[$collectionID]['type'] == 'series' )
+	{
+		$collection = new SeriesCollection();
+	}
+
+	if( ! isset( $collection ) )
+	{
+		echo $COLLECTIONS[$collectionID]['type'] . " is not a valid type !\n";
+		return 127;
+	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
-		$error =  $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !\n";
+		return 127;
 	}
-	if ( ! $collection->setThumbsDir( $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
+	if ( ! $collection->setThumbsDir( '../' . $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
 	{
-		if ( ! isset( $error ) ) $error =  $COLLECTIONS[$collectionID]['thumbs-dir'] . " directory does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . " directory does not exists or is not readable !\n";
+		return 127;
 	}
 	if ( ! $collection->load() )
 	{
-		if ( ! isset( $error ) ) $error = "Could not load collection !";
+		echo "Could not load collection !";
+		return 127;
 	}
 
-	//$i = 0;
+	print "Number of item: " . $collection->count() . "\n";
+
+	$collection->sort( 'id' );
 	foreach( $collection->getItems() as $item )
 	{
-		echo $item->id . "->" . $item->title . "\n";
-		foreach( $item->getEpisodeList() as $episode )
+		//echo $item->id . "->" . $item->title . "\n";
+		if( $COLLECTIONS[$collectionID]['type'] == 'series' )
 		{
-			echo "\t$episode\n";
+			foreach( $item->getEpisodeList() as $episode )
+			{
+				echo "\t$episode\n";
+			}
 		}
+		if ( $item->synopsis == "" ) echo "$item->title\n";
 	}
 ?>
