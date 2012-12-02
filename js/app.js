@@ -66,6 +66,7 @@ function setMainOpacity( opacity )
 
 function getItem( item )
 {
+	$('#popup-title').html( 'Collection - D&eacute;tails' );
 	setLoader( '#details', '#popup', 'loader' );
 	$('#popup').show();
 	setMainOpacity( 0.15 );
