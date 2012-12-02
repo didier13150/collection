@@ -59,6 +59,26 @@ class FilmItem extends VideoItem
 	public $director;
 	public $country;
 	public $trailer;
+
+	public static function parseDuration( $raw )
+	{
+		$matches = null;
+		$duration = 0;
+
+		if ( preg_match( '/^(\d+)$/', $raw, $matches ) )
+		{
+			$duration = intval( $matches[1] );
+		}
+		elseif ( preg_match( '/^(\d+)\s*mins?$/i', $raw, $matches ) )
+		{
+			$duration = intval( $matches[1] );
+		}
+		elseif ( preg_match( '/^(\d+)\s*h\s*(\d+)\s*m?i?n?s?/i', $raw, $matches ) )
+		{
+			$duration = intval( $matches[1] ) * 60 + intval( $matches[2] );
+		}
+		return $duration;
+	}
 }
 
 class SeriesItem extends VideoItem

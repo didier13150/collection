@@ -60,16 +60,41 @@
 	print "Number of item: " . $collection->count() . "\n";
 
 	$collection->sort( 'id' );
+
+	$mistake = array(
+		'synopsis' => array(),
+		'duration' => array(),
+	);
+
 	foreach( $collection->getItems() as $item )
 	{
-		//echo $item->id . "->" . $item->title . "\n";
+		/*echo $item->id . "->" . $item->title . "\n";
 		if( $COLLECTIONS[$collectionID]['type'] == 'series' )
 		{
 			foreach( $item->getEpisodeList() as $episode )
 			{
 				echo "\t$episode\n";
 			}
+		}*/
+		if ( $item->synopsis == "" ) $mistake['synopsis'][] = $item->title;
+		if ( ! $item->duration ) $mistake['duration'][] = $item->title;;
+	}
+
+	if ( count ( $mistake['synopsis'] ) )
+	{
+		echo "Film without synopsis\n";
+		foreach( $mistake['synopsis'] as $name )
+		{
+			echo "\t$name\n";
 		}
-		if ( $item->synopsis == "" ) echo "$item->title\n";
+	}
+
+	if ( count ( $mistake['duration'] ) )
+	{
+		echo "Film without valid duration\n";
+		foreach( $mistake['duration'] as $name )
+		{
+			echo "\t$name\n";
+		}
 	}
 ?>

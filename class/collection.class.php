@@ -217,7 +217,7 @@ class SeriesCollection extends Collection
 				);
 			}
 		}
-		$item->rating = $itemXML['rating'];
+		$item->rating = intval( $itemXML['rating'] );
 		$item->_isInit = true;
 		return $item;
 	}
@@ -283,7 +283,7 @@ class FilmsCollection extends Collection
 		$item->originalTitle = $itemXML['original'];
 		$item->thumbnail = $this->_thumbs_dir . '/' . basename( $itemXML['image'] );
 		$item->date = $itemXML['date'];
-		$item->duration = $itemXML['time'];
+		$item->duration = FilmItem::parseDuration( $itemXML['time'] );
 		$item->director = $itemXML['director'];
 		$item->country = $itemXML['country'];
 		$item->synopsis = $itemXML->synopsis;
@@ -299,7 +299,7 @@ class FilmsCollection extends Collection
 				);
 			}
 		}
-		$item->rating = $itemXML['rating'];
+		$item->rating = intval( $itemXML['rating'] );
 		$item->_isInit = true;
 		return $item;
 	}
