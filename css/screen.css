@@ -18,25 +18,29 @@ noscript div{
 }
 header {
 	display:block;
-	height:60px;
+	height:24px;
 	margin:0;
 	padding:5px;
 	border-width:0 0 1px 0;
 }
 header span#top {
 	display:block;
-	width:60px;
-	height:60px;
+	width:64px;
+	height:64px;
 	background-image:url("../img/logo.png");
 	float:left;
 	padding:0;
 	background-color:transparent;
 	cursor:pointer;
+	position:absolute;
+	top: 5px;
+	left: 5px;
 }
 
 hgroup {
 	display:block;
 	float:left;
+	margin-left: 70px;
 }
 
 h1, h2, h3, a, ul, .title {
@@ -88,16 +92,17 @@ header h1 {
 	float:left;
 	font-size: 26px;
 	height: 26px;
-	margin:-2px 10px 0 30px;
+	margin:0 10px 0 30px;
 	padding: 0;
+	line-height: 24px;
 }
 
 header h2 {
-	float:right;
-	clear:both;
+	float:left;
 	margin:5px 10px 0 10px;
-	font-size: 22px;
+	font-size: 18px;
 	height: 22px;
+	line-height: 8px;
 }
 
 footer {
@@ -134,7 +139,7 @@ article {
 nav {
 	display:block;
 	padding:0 0 0 5px;
-	margin:5px 0 0 0;
+	margin:5px 0 0 100px;
 	float:left;
 	clear:both;
 }
@@ -143,6 +148,7 @@ nav a {
 	border-width:1px 1px 0 1px;
 	border-bottom-left-radius:0;
 	border-bottom-right-radius:0;
+	border-style: solid;
 	padding:5px;
 	margin:4px 0 0 0;
 	font-weight:bold;
@@ -507,5 +513,12 @@ span.page-selected {
 	padding: 0 0 0 2px;
 	color: inherit;
 	background-color:steelblue;
+	background-image:url("../img/bg-item.png");
+	background-repeat:repeat-x;
+	background-position:50% 50%;
 	color:Cornsilk;
+	border-left: steelblue 1px solid;
+	border-right: steelblue 1px solid;
+	border-bottom: steelblue 1px solid;
+	border-radius: 0 0 4px 4px;
 }

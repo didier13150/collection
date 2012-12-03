@@ -33,7 +33,7 @@ abstract class Collection
 		return false;
 	}
 
-	abstract protected function getItemsFromXML( $itemXML );
+	abstract protected function getItemFromXML( $itemXML );
 
 	public function load()
 	{
@@ -45,7 +45,7 @@ abstract class Collection
 		}
 		foreach( $xml as $itemXML )
 		{
-			$item = $this->getItemsFromXML( $itemXML );
+			$item = $this->getItemFromXML( $itemXML );
 			if ( $item ) $this->_items[] = $item;
 		}
 		return true;
@@ -100,7 +100,7 @@ abstract class Collection
 		if ( isset( $id ) )
 		{
 			$itemXML = $this->getItemXML( $id );
-			$item = $this->getItemsFromXML( $itemXML );
+			$item = $this->getItemFromXML( $itemXML );
 			if ( $item ) return $item;
 		}
 		return false;
@@ -186,12 +186,12 @@ abstract class Collection
 */
 class SeriesCollection extends Collection
 {
-	protected function getItemsFromXML( $itemXML )
+	protected function getItemFromXML( $itemXML )
 	{
-		$id = intval( $itemXML['id'] );
+		$id = $itemXML['id'];
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new SeriesItem();
-		$item->id = $id;
+		$item->id = intval( $itemXML['id'] );
 		$item->title = $itemXML['series'] . ' - saison ' . $itemXML['season'];
 		$item->synopsis = $itemXML->synopsis;
 		$item->thumbnail = $this->_thumbs_dir . '/' . basename( $itemXML['image'] );
@@ -269,12 +269,12 @@ class SeriesCollection extends Collection
 */
 class FilmsCollection extends Collection
 {
-	protected function getItemsFromXML( $itemXML )
+	protected function getItemFromXML( $itemXML )
 	{
-		$id = intval( $itemXML['id'] );
+		$id = $itemXML['id'];
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new FilmItem();
-		$item->id = $id;
+		$item->id = intval( $itemXML['id'] );
 		$item->title = $itemXML['title'];
 		if ( $item->title == "" )
 		{

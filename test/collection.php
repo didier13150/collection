@@ -77,7 +77,7 @@
 			}
 		}*/
 		if ( $item->synopsis == "" ) $mistake['synopsis'][] = $item->title;
-		if ( ! $item->duration ) $mistake['duration'][] = $item->title;;
+		if ( ! $item->duration ) $mistake['duration'][] = $item->title;
 	}
 
 	if ( count ( $mistake['synopsis'] ) )

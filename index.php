@@ -35,7 +35,7 @@
 		<span class="logo" id="top"></span>
 		<hgroup>
 			<h1>Collection</h1>
-			<h2>Vid&eacute;os</h2>
+			<h2>Vid&eacute;o</h2>
 		</hgroup>
 	</header>
 	<nav>

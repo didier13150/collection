@@ -38,12 +38,12 @@ class VideoItem extends Item
 	public function getJoinActorList()
 	{
 		$list = array();
-		foreach( $this->actors as $actor )
+		foreach( $this->actors as $actors )
 		{
-			$data = $actor['artist'];
-			if ( ! empty( $actor['character'] ) )
+			$data = $actors['artist'];
+			if ( $actors['character'] != "" )
 			{
-				$data .= "( " . $actor['character'] . " )";
+				$data .= "(" . $actors['character'] . ")";
 			}
 			$list[] = $data;
 		}

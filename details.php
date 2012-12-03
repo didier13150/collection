@@ -75,9 +75,9 @@
 			<label for="detail-date" >Date</label>
 			<input type="text" id="detail-date" value="<?php echo htmlentities( $item->date );?>">
 			<?php endif;?>
-			<?php if( $item->duration != "" ):?>
+			<?php if( $item->duration > 0 ):?>
 			<label for="detail-duration" >Dur&eacute;e</label>
-			<input type="text" id="detail-duration" value="<?php echo htmlentities( $item->duration );?>">
+			<input type="text" id="detail-duration" value="<?php echo htmlentities( $item->duration );?> min">
 			<?php endif;?>
 			<?php if( $item->director != "" ):?>
 			<label for="detail-director" >R&eacute;alisateur</label>
