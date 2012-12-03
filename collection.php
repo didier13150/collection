@@ -59,8 +59,8 @@
 	$maxItem = $collection->count();
 ?>
 <script language="javascript">
-			<?php foreach( $items as $id => $film ):?>
-			bindThumbnail( '<?php echo $film->id;?>' );
+			<?php foreach( $items as $id => $item ):?>
+			bindItem( '<?php echo $item->id;?>' );
 			<?php endforeach;?>
 			<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
 			bindPage( '<?php echo $i;?>' );
@@ -68,7 +68,7 @@
 			resizeArticle();
 </script>
 <p>
-	<span>Page
+	<span><span class="bold">Page</span>
 	<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
 		<?php if ( $i != 0 ) echo "|";?>
 
@@ -79,12 +79,12 @@
 		<?php endif;?>
 	<?php endfor;?>
 	<span>
-	<span class="right collection-data"><?php echo $maxItem;?> &eacute;l&eacute;ment<?php if ( count( $items ) > 1 ) echo 's';?> dans la collection</span>
+	<span class="right collection-data"><span class="bold"><?php echo $maxItem;?></span> &eacute;l&eacute;ment<?php if ( count( $items ) > 1 ) echo 's';?> dans la collection</span>
 </p>
 <div id="thumbnails">
-	<?php foreach( $items as $id => $film ):?>
-	<a href="#" class="item thumbnail-container" id="item-<?php echo $film->id;?>">
-	<img class="thumbnail-<?php echo $THUMB_SIZE;?>" src="<?php echo $film->getThumbnail( $THUMB_SIZE );?>" alt="<?php echo $film->title;?>" title="<?php echo $film->title;?>">
+	<?php foreach( $items as $id => $item ):?>
+	<a href="#" class="item thumbnail-container" id="item-<?php echo $item->id;?>">
+	<img class="thumbnail-<?php echo $THUMB_SIZE;?>" src="<?php echo $item->getThumbnail( $THUMB_SIZE );?>" alt="<?php echo $item->title;?>" title="<?php echo $item->title;?>">
 	</a>
 	<?php endforeach;?>
 </div>

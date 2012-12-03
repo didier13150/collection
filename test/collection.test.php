@@ -88,6 +88,7 @@
 			echo "\t$name\n";
 		}
 	}
+	else echo "All Film have synopsis\n";
 
 	if ( count ( $mistake['duration'] ) )
 	{
@@ -97,4 +98,5 @@
 			echo "\t$name\n";
 		}
 	}
+	else echo "All Film have valid duration\n";
 ?>

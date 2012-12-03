@@ -1,5 +1,6 @@
 var bgcolor;
 var collection = 0;
+var searchDefault;
 
 function init() {
 	bgcolor = $('body').css( 'background-color' );
@@ -20,9 +21,23 @@ function init() {
 			resizeArticle();
 		}
 	);
+	$('#search-text').bind(
+		'focus',
+		function() {
+			$('#search-text').css( 'color', 'inherit' );
+			$('#search-text').val( '' );
+		}
+	);
+	$('#search-text').bind(
+		'focusout',
+		function() {
+			$('#search-text').css( 'color', 'lightgrey' );
+			$('#search-text').val( searchDefault );
+		}
+	);
 }
 
-function bindThumbnail( item ) {
+function bindItem( item ) {
 	$( '#item-' + item ).on(
 		'click',
 		function() {
@@ -46,6 +61,15 @@ function bindPage( id ) {
 		'click',
 		function() {
 			getCollection( id );
+		}
+	);
+}
+
+function bindSearch() {
+	$( '#search-btn' ).on(
+		'click',
+		function() {
+			search();
 		}
 	);
 }
@@ -110,6 +134,48 @@ function getCollection( offset )
 			alert( 'Error reported when trying to get collection ' + collection );
 		}
 	});
+}
+
+function search()
+{
+	$('#popup-title').html( 'Collection - Recherche' );
+	setLoader( '#details', '#popup', 'loader' );
+	$('#popup').show();
+	setMainOpacity( 0.15 );
+	var arg = '';
+	var target = $('#search-text').val();
+	if( target == '' ) {
+		alert( 'Nothing to find' );
+		$('#popup').hide();
+		setMainOpacity( 1 );
+		return;
+	}
+	arg = '?collection=' + collection + '&search=' + target;
+	$.ajax({
+		url: 'search.php' + arg,
+		success: function( data ) {
+			$('#details').html( data );
+		},
+		error: function() {
+			alert( 'Error reported when trying to search "' + target + '" on collection ' + collection );
+			$('#popup').hide();
+			setMainOpacity( 1 );
+		}
+	});
+}
+
+function setSearchDefault( activate )
+{
+	if ( activate )
+	{
+		$('#search-text').val( '' );
+		$('#search-text').css( 'color', 'inherit' );
+	}
+	else
+	{
+		$('#search-text').css( 'color', 'lightgrey' );
+		$('#search-text').val( searchDefault );
+	}
 }
 
 function setLoader( element, parent, loaderClass )

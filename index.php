@@ -24,6 +24,9 @@
 			<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
 				bindTab( '<?php echo $id;?>' );
 			<?php endforeach;?>
+			bindSearch();
+			searchDefault = '<?php echo 'Chercher un film';?>';
+			setSearchDefault( false );
 		});
 	</script>
 </head>
@@ -37,6 +40,10 @@
 			<h1>Collection</h1>
 			<h2>Vid&eacute;o</h2>
 		</hgroup>
+		<form id="search-box">
+			<input type="text" id="search-text" value="">
+			<input type="submit" value="Chercher" id="search-btn">
+		</form>
 	</header>
 	<nav>
 		<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
