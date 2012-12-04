@@ -593,3 +593,9 @@ span.error {
 .bold {
 	font-weight: bold;
 }
+
+#sort-container {
+	position: absolute;
+	top: 50px;
+	right: 10px;
+}

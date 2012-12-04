@@ -86,7 +86,7 @@
 			&eacute;l&eacute;ment<?php if ( count( $items ) > 1 ) echo 's';?> dans la collection
 		</span>
 	</div>
-	<div class="borded">
+	<div id="sort-container">
 		<label for="sort-fields">El&eacute;ments Class&eacute;s par </label>
 		<select id="sort-fields">
 			<optgroup label="Options générales">
