@@ -62,25 +62,25 @@
 <?php endif;?>
 	<img class="thumbnail-<?php echo $DETAIL_SIZE;?>" src="<?php echo $item->getThumbnail( $DETAIL_SIZE );?>" alt="<?php echo $item->title;?>">
 	<div class="form-header">
-		<label for="detail-ID">ID</label>
+		<label for="detail-ID" class="fixed-length">ID</label>
 		<input type="text" id="detail-ID" value="<?php echo $item->id;?>">
-		<label for="detail-title">Titre</label>
+		<label for="detail-title" class="fixed-length">Titre</label>
 		<input type="text" id="detail-title" value="<?php echo htmlentities( $item->title );?>">
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'film' ):?>
 			<?php if( $item->originalTitle != "" ):?>
-			<label for="detail-orig-title" >Titre Original</label>
+			<label for="detail-orig-title" class="fixed-length">Titre Original</label>
 			<input type="text" id="detail-orig-title" value="<?php echo htmlentities( $item->originalTitle );?>">
 			<?php endif;?>
-			<?php if( $item->date != "" ):?>
-			<label for="detail-date" >Date</label>
-			<input type="text" id="detail-date" value="<?php echo htmlentities( $item->date );?>">
+			<?php if( $item->year ):?>
+			<label for="detail-date" class="fixed-length">Date</label>
+			<input type="text" id="detail-date" value="<?php echo htmlentities( $item->year );?>">
 			<?php endif;?>
-			<?php if( $item->duration > 0 ):?>
-			<label for="detail-duration" >Dur&eacute;e</label>
+			<?php if( $item->duration ):?>
+			<label for="detail-duration" class="fixed-length">Dur&eacute;e</label>
 			<input type="text" id="detail-duration" value="<?php echo htmlentities( $item->duration );?> min">
 			<?php endif;?>
 			<?php if( $item->director != "" ):?>
-			<label for="detail-director" >R&eacute;alisateur</label>
+			<label for="detail-director" class="fixed-length">R&eacute;alisateur</label>
 			<input type="text" id="detail-director" value="<?php echo htmlentities( $item->director );?>">
 			<?php endif;?>
 		<?php endif;?>

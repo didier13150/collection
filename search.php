@@ -5,14 +5,20 @@
 
 	function removeAccents( $accented )
 	{
-		$return = $accented;
-		$return = preg_replace( "/à|â/i", "a", $return );
-		$return = preg_replace( "/é|è|ê/i", "e", $return );
-		$return = preg_replace( "/î/i", "i", $return );
-		$return = preg_replace( "/ô/i", "o", $return );
-		$return = preg_replace( "/û/i", "u", $return );
-		$return = preg_replace( "/ç/i", "c", $return );
-		return $return;
+		$str = $accented;
+		$str = preg_replace( "/à|â/i", "a", $str );
+		$str = preg_replace( "/é|è|ê/i", "e", $str );
+		$str = preg_replace( "/î/i", "i", $str );
+		$str = preg_replace( "/ô/i", "o", $str );
+		$str = preg_replace( "/û/i", "u", $str );
+		$str = preg_replace( "/ç/i", "c", $str );
+		$chars = str_split( $str, 1 );
+		$return = array();
+		foreach( $chars as $char )
+		{
+			$return[] = $char;// . "\s*";
+		}
+		return join( '', $return );
 	}
 
 	$collectionID = 0;
@@ -101,7 +107,7 @@
 			<a href="#" class="item" id="item-<?php echo $item->id;?>">
 				<?php echo $item->title;?>
 			</a>
-			de <?php echo $item->director;?> (<?php echo $item->date;?>)
+			de <?php echo $item->director;?> (<?php echo $item->year;?>)
 		</li>
 	<?php endforeach;?>
 	</ul>

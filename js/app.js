@@ -1,6 +1,8 @@
 var bgcolor;
 var collection = 0;
 var searchDefault;
+var sortBy;
+var defaultSortBy;
 
 function init() {
 	bgcolor = $('body').css( 'background-color' );
@@ -51,6 +53,7 @@ function bindTab( id ) {
 		'click',
 		function() {
 			collection = id;
+			sortBy = defaultSortBy;
 			getCollection();
 		}
 	);
@@ -70,6 +73,17 @@ function bindSearch() {
 		'click',
 		function() {
 			search();
+		}
+	);
+}
+
+function bindSelect() {
+	$( '#sort-fields' ).off( 'change' );
+	$( '#sort-fields' ).on(
+		'change',
+		function() {
+			sortBy = $('#sort-fields').val();
+			getCollection();
 		}
 	);
 }
@@ -122,6 +136,9 @@ function getCollection( offset )
 		arg = '?collection=' + collection;
 		if ( parseInt( offset ) >= 0 ) {
 			arg += '&start=' + offset;
+		}
+		if ( sortBy ) {
+			arg += '&sort=' + sortBy;
 		}
 	}
 	$.ajax({

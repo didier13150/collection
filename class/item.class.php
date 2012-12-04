@@ -54,13 +54,13 @@ class VideoItem extends Item
 class FilmItem extends VideoItem
 {
 	public $originalTitle;
-	public $date;
+	public $year;
 	public $duration;
 	public $director;
 	public $country;
 	public $trailer;
 
-	public static function parseDuration( $raw )
+	public static function getDuration( $raw )
 	{
 		$matches = null;
 		$duration = 0;
@@ -77,7 +77,27 @@ class FilmItem extends VideoItem
 		{
 			$duration = intval( $matches[1] ) * 60 + intval( $matches[2] );
 		}
-		return $duration;
+		return intval( $duration );
+	}
+
+	public static function getYearFromDate( $date )
+	{
+		$matches = null;
+		$year = 0;
+
+		if ( preg_match( '/^(\d+)$/', $date, $matches ) )
+		{
+			$year = intval( $matches[1] );
+		}
+		elseif ( preg_match( '/^(\d{4})-\d{2}+-\d{2}$/i', $date, $matches ) )
+		{
+			$year = intval( $matches[1] );
+		}
+		elseif ( preg_match( '/^\d{2}+-\d{2}-(\d{4})$/i', $date, $matches ) )
+		{
+			$year = intval( $matches[1] );
+		}
+		return intval( $year );
 	}
 }
 

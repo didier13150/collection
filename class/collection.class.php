@@ -122,8 +122,8 @@ abstract class Collection
     {
 		if ( is_int( $a->{self::$sortKey} ) )
 		{
-			if($a == $b) return 0;
-			elseif( $a > $b ) return 1;
+			if( $a->{self::$sortKey} == $b->{self::$sortKey} ) return 0;
+			elseif( $a->{self::$sortKey} > $b->{self::$sortKey} ) return 1;
 			return -1;
 		}
     	return strcasecmp( $a->{self::$sortKey}, $b->{self::$sortKey} );
@@ -282,8 +282,8 @@ class FilmsCollection extends Collection
 		}
 		$item->originalTitle = $itemXML['original'];
 		$item->thumbnail = $this->_thumbs_dir . '/' . basename( $itemXML['image'] );
-		$item->date = $itemXML['date'];
-		$item->duration = FilmItem::parseDuration( $itemXML['time'] );
+		$item->year = FilmItem::getYearFromDate( $itemXML['date'] );
+		$item->duration = FilmItem::getDuration( $itemXML['time'] );
 		$item->director = $itemXML['director'];
 		$item->country = $itemXML['country'];
 		$item->synopsis = $itemXML->synopsis;

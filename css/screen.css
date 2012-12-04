@@ -313,11 +313,19 @@ div.form-body {
 	clear:both;
 }
 
+div.borded {
+	clear:both;
+	margin:0 5px;
+}
+
 
 label {
+	display:inline-block;
+}
+
+label.fixed-length {
 	margin:2px 5px;
 	width:100px;
-	display:inline-block;
 }
 
 #detail-rating {
@@ -541,29 +549,40 @@ form#search-box input[type="text"] {
 	margin: 0;
 	border-top: lightgrey 1px solid;
 	border-left: lightgrey 1px solid;
-	border-bottom: lightsteelblue 2px solid;
+	border-bottom: lightsteelblue 1px solid;
 	border-right: none;
 	background:url("../img/icons.png") white no-repeat;
 	background-position:-2px -46px;
 	padding: 0 0 0 20px;
 }
 
-form#search-box input[type="submit"] {
-	width: 100px;
-	height: 23px;
-	color:black;
+form#search-box input[type="submit"], select {
+	height: 22px;
 	line-height:16px;
-	background-color:lightsteelblue;
 	background-image:url("../img/bg-item.png");
 	background-repeat:repeat-x;
 	background-position:50% 50%;
-	border-top: lightgrey 1px solid;
-	border-right: lightsteelblue 1px solid;
-	border-bottom: lightsteelblue 2px solid;
-	border-left: lightgrey 1px solid;
-	border-radius: 0 4px 4px 0;
 	font-weight: bold;
 	margin: 0;
+}
+
+form#search-box input[type="submit"] {
+	width: 100px;
+	border-radius: 0 4px 4px 0;
+	border-top: lightgrey 1px solid;
+	border-right: lightsteelblue 1px solid;
+	border-bottom: lightsteelblue 1px solid;
+	border-left: lightgrey 1px solid;
+	background-color:lightsteelblue;
+	color:black;
+}
+
+select {
+	border-radius: 4px;
+	padding: 0 5px;
+	border: steelblue 1px solid;
+	background-color:steelblue;
+	color:Cornsilk;
 }
 
 span.error {

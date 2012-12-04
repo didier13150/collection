@@ -20,12 +20,14 @@
 		$(document).ready( function() {
 			init();
 			collection = 0;
+			sortBy = '<?php echo 'title';?>';
+			defaultSortBy = '<?php echo 'title';?>';
+			searchDefault = '<?php echo 'Chercher un film';?>';
 			getCollection();
 			<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
 				bindTab( '<?php echo $id;?>' );
 			<?php endforeach;?>
 			bindSearch();
-			searchDefault = '<?php echo 'Chercher un film';?>';
 			setSearchDefault( false );
 		});
 	</script>

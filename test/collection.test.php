@@ -59,7 +59,7 @@
 
 	print "Number of item: " . $collection->count() . "\n";
 
-	$collection->sort( 'id' );
+	$collection->sort( $sort );
 
 	$mistake = array(
 		'synopsis' => array(),
