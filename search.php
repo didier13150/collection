@@ -12,13 +12,19 @@
 		$str = preg_replace( "/ô/i", "o", $str );
 		$str = preg_replace( "/û/i", "u", $str );
 		$str = preg_replace( "/ç/i", "c", $str );
-		$chars = str_split( $str, 1 );
+		return $str;
+	}
+
+	function getRegex( $str )
+	{
+		$worlds = preg_split( "/ /", $str, -1, PREG_SPLIT_NO_EMPTY );
 		$return = array();
-		foreach( $chars as $char )
+		foreach( $worlds as $world )
 		{
-			$return[] = $char;// . "\s*";
+			$chars = str_split( $world, 1 );
+			$return[] = join( '\s*', $chars );
 		}
-		return join( '', $return );
+		return join( '.*', $return );
 	}
 
 	$collectionID = 0;
@@ -73,36 +79,51 @@
 	}
 	$collection->sort( $sort );
 	$items = $collection->getItems();
-	//$searches = explode( " ", $search );
+	$occurencies = array();
+	/*
 	$hits = array();
+	$searches = preg_split( "/\s+/", $search, -1, PREG_SPLIT_NO_EMPTY );
+	$nbOfWorld = str_word_count( $search );
 
 	foreach( $items as $item )
 	{
-		$title = removeAccents( $item->title );
-		/*foreach( $searches as $target )
+		for( $i = 0 ; $i < $nbOfWorld ; $i++ )
 		{
-			if ( preg_match( "/$target/i", $title ) )
+			if ( preg_match( "/" . getRegex( $searches[$i] ) . "/i", removeAccents( $item->title ) ) )
 			{
-				$hits[$target][] = $item;
+				$hits[$i][] = $item;
 			}
-		}*/
-		if ( preg_match( "/$search/i", $title ) )
-		{
-			$hits[] = $item;
 		}
 	}
 
-	//$intersect = array_intersect( $hits[$searches[0]], $hits[$searches[1]] );
+	for( $i = 0 ; $i < ( $nbOfWorld - 1 ) ; $i++ )
+	{
+		$occurencies = array_intersect( $hits[$i], $hits[$i+1] );
+	}
+	if ( $nbOfWorld == 1 )
+	{
+		$occurencies = $hits[0];
+	}*/
+	$regex = getRegex( $search );
+	echo "<!-- $regex -->";
+	foreach( $items as $item )
+	{
+		if ( preg_match( "/$regex/i", removeAccents( $item->title ) ) )
+		{
+			$occurencies[] = $item;
+		}
+	}
+
 ?>
 <script language="javascript">
-	<?php foreach( $hits as $id => $item ):?>
+	<?php foreach( $occurencies as $item ):?>
 		bindItem( '<?php echo $item->id;?>' );
 	<?php endforeach;?>
 </script>
 <form class="big">
-<?php if( count( $hits ) ):?>
+<?php if( count( $occurencies ) ):?>
 	<ul class="search">
-	<?php foreach( $hits as $item ):?>
+	<?php foreach( $occurencies as $item ):?>
 		<li class="search">
 			<a href="#" class="item" id="item-<?php echo $item->id;?>">
 				<?php echo $item->title;?>
