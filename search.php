@@ -137,7 +137,10 @@
 		<li class="search">
 			<a href="./details.php?collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item" id="item-<?php echo $item->id;?>">
 				<?php echo $item->title;?>
-			</a>
+			</a><br>
+			<?php if( $item->originalTitle != "" ):?>
+			(<?php echo $item->originalTitle;?>)
+			<?php endif;?>
 			de <?php echo $item->director;?> (<?php echo $item->year;?>)
 		</li>
 	<?php endforeach;?>

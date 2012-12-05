@@ -21,6 +21,7 @@ function init() {
 	$(window).resize(
 		function() {
 			resizeArticle();
+			posPopup();
 		}
 	);
 	$('#search-text').bind(
@@ -219,3 +220,12 @@ function resizeArticle()
 	}
 	$('#thumbnails').css( 'height', articleHeight + 'px' );
 }
+
+function posPopup()
+{
+	var width = $(window).width();
+	var popupWidth = $('#popup').width();
+	var margin = ( width - popupWidth ) /2;
+	$('#popup').css( 'left', margin + 'px' );
+}
+
