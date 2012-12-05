@@ -37,6 +37,7 @@ function init() {
 			$('#search-text').val( searchDefault );
 		}
 	);
+	$('a').attr( 'href', '#' );
 }
 
 function bindItem( item ) {
@@ -110,7 +111,7 @@ function getItem( item )
 	setMainOpacity( 0.15 );
 	var arg = '';
 	if( parseInt( item ) >= 0 ) {
-		arg = '?collection=' + collection + '&item=' + item;
+		arg = '?collection=' + collection + '&item=' + item + '&ajax=1';
 	}
 	$.ajax({
 		url: 'details.php' + arg,
@@ -135,11 +136,12 @@ function getCollection( offset )
 	if( parseInt( collection ) >= 0 ) {
 		arg = '?collection=' + collection;
 		if ( parseInt( offset ) >= 0 ) {
-			arg += '&start=' + offset;
+			arg += '&page=' + offset;
 		}
 		if ( sortBy ) {
 			arg += '&sort=' + sortBy;
 		}
+		arg += '&ajax=1';
 	}
 	$.ajax({
 		url: 'collection.php' + arg,
@@ -167,7 +169,10 @@ function search()
 		setMainOpacity( 1 );
 		return;
 	}
-	arg = '?collection=' + collection + '&search=' + target;
+	arg = '?collection=' + collection + '&search=' + target + '&ajax=1';
+	if ( sortBy ) {
+		arg += '&sort=' + sortBy;
+	}
 	$.ajax({
 		url: 'search.php' + arg,
 		success: function( data ) {

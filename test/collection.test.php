@@ -64,6 +64,7 @@
 	$mistake = array(
 		'synopsis' => array(),
 		'duration' => array(),
+		'director' => array(),
 	);
 
 	foreach( $collection->getItems() as $item )
@@ -78,6 +79,7 @@
 		}*/
 		if ( $item->synopsis == "" ) $mistake['synopsis'][] = $item->title;
 		if ( ! $item->duration ) $mistake['duration'][] = $item->title;
+		if ( ! $item->director ) $mistake['director'][] = $item->title;
 	}
 
 	if ( count ( $mistake['synopsis'] ) )
@@ -99,4 +101,14 @@
 		}
 	}
 	else echo "All Film have valid duration\n";
+
+	if ( count ( $mistake['director'] ) )
+	{
+		echo "Film without valid director\n";
+		foreach( $mistake['director'] as $name )
+		{
+			echo "\t$name\n";
+		}
+	}
+	else echo "All Film have valid director\n";
 ?>

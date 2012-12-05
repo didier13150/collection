@@ -4,7 +4,7 @@ body {
 }
 
 body, nav a {
-	background-color:Cornsilk;
+	background-color:LemonChiffon ;
 }
 
 noscript div{
@@ -13,7 +13,7 @@ noscript div{
 	color:red;
 	border:red 1px solid;
 	margin:10px;
-	padding:10px;
+	padding:10px 10px 10px 100px;
 
 }
 header {
@@ -80,7 +80,7 @@ header, footer, nav a.current-tab, .button  {
 }
 
 header h1, header h2, header h3, footer, nav a.current-tab, .button {
-	color:Cornsilk;
+	color:LemonChiffon ;
 }
 
 header h1, header h2, header h3 {
@@ -286,7 +286,7 @@ div#popup {
 	border-radius: 5px;
 	border: black 2px solid;
 	z-index:10;
-	background-color:Cornsilk;
+	background-color:LemonChiffon ;
 	display:none;
 	padding:0 0 5px 0;
 }
@@ -373,7 +373,7 @@ form input {
 	margin:0;
 	font-size:1.3em;
 	font-weight:bold;
-	border: 1px solid Cornsilk;
+	border: 1px solid LemonChiffon ;
 }
 
 span.icon, span.minicon {
@@ -444,7 +444,7 @@ span.icon-rating {
 span.icon-rating-disable {
 	background-position:-44px -24px;
 	opacity: 0.25;
-	/*color:Cornsilk;*/
+	/*color:LemonChiffon ;*/
 }
 /*
 
@@ -530,7 +530,7 @@ span.page-selected {
 	background-image:url("../img/bg-item.png");
 	background-repeat:repeat-x;
 	background-position:50% 50%;
-	color:Cornsilk;
+	color:LemonChiffon ;
 	border-left: steelblue 1px solid;
 	border-right: steelblue 1px solid;
 	border-bottom: steelblue 1px solid;
@@ -582,7 +582,7 @@ select {
 	padding: 0 5px;
 	border: steelblue 1px solid;
 	background-color:steelblue;
-	color:Cornsilk;
+	color:LemonChiffon ;
 }
 
 span.error {

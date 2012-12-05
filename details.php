@@ -7,7 +7,8 @@
 	// GCStar item id start at 1
 	$itemID = 1;
 	$collectionID = 0;
-	ob_start();
+	$ajax = 0;
+
 	if ( isset( $_GET['item'] ) and ! empty( $_GET['item'] ) )
 	{
 		$itemID = $_GET['item'];
@@ -54,7 +55,28 @@
 		echo "Could not load collection's item !";
 		return 127;
 	}
+
+	ob_start();
 ?>
+<?php if( ! $ajax ):?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Collection</title>
+	<meta name="AUTHOR" content="Didier Fabert"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+	<link type="text/css" rel="stylesheet" href="css/shared.css"/>
+	<link type="text/css" rel="stylesheet" href="css/screen.css" media="screen"/>
+	<!-- <link type="text/css" rel="stylesheet" href="css/print.css" media="print"/> -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/iutil.js"></script>
+	<script type="text/javascript" src="js/idrag.js"></script>
+</head>
+<body>
+<?php endif;?>
+
 <?php if( $COLLECTIONS[$collectionID]['type'] == 'series' ):?>
 <form class="big">
 <?php else:?>
@@ -113,6 +135,10 @@
 <script language="javascript">
 	$('#popup-title').html( '<?php echo htmlentities( $item->title );?>' );
 </script>
+<?php if( ! $ajax ):?>
+</body>
+</html>
+<?php endif;?>
 <?php
 	$html = ob_get_clean();
 	echo $html;

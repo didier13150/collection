@@ -1,5 +1,6 @@
 <?php
 	include_once( 'settings.php' );
+	ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +30,7 @@
 			<?php endforeach;?>
 			bindSearch();
 			setSearchDefault( false );
+			$('a').attr( 'href', '#' );
 		});
 	</script>
 </head>
@@ -49,7 +51,7 @@
 	</header>
 	<nav>
 		<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
-		<a href="#" class="tab" id="tab-<?php echo $id;?>">
+		<a href="./collection.php?collection=<?php echo $id;?>" class="tab" id="tab-<?php echo $id;?>">
 			<span id="icon-<?php echo $id;?>" class="icon icon-video"></span><?php echo htmlentities( $collection_settings['title'] );?>
 		</a>
 		<?php endforeach;?>
@@ -72,3 +74,8 @@
 	</footer>
 </body>
 </html>
+<?php
+	$html = ob_get_clean();
+	echo $html;
+	return 0;
+?>
