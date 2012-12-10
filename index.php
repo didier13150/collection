@@ -28,6 +28,10 @@
 	{
 		$query = $_GET['query'];
 	}
+	else
+	{
+		$query = 'collection';
+	}
 	ob_start();
 ?>
 
@@ -53,7 +57,6 @@
 			sortBy = '<?php echo 'title';?>';
 			defaultSortBy = '<?php echo 'title';?>';
 			searchDefault = '<?php echo 'Chercher un film';?>';
-			getCollection();
 			<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
 				bindTab( '<?php echo $id;?>' );
 			<?php endforeach;?>
@@ -63,6 +66,10 @@
 	</script>
 </head>
 <body>
+	<noscript>
+		<div class="noscript">Pour une utilisation optimale, vous devez activer les scripts Javascript.
+		</div>
+	</noscript>
 	<header>
 		<span class="logo" id="logo-top"></span>
 		<hgroup>
@@ -78,7 +85,7 @@
 	</header>
 	<nav>
 		<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
-		<a href="index.php?query=collection&collection=<?php echo $id;?>" class="tab<?php if( $id == $_SESSION['collection'] ) echo " current-tab";?>" id="tab-<?php echo $id;?>">
+		<a href="index.php?query=collection&amp;collection=<?php echo $id;?>" class="tab<?php if( $id == $_SESSION['collection'] ) echo " current-tab";?>" id="tab-<?php echo $id;?>">
 			<span id="icon-<?php echo $id;?>" class="icon icon-video"></span><?php echo htmlentities( $collection_settings['title'] );?>
 		</a>
 		<?php endforeach;?>
@@ -94,17 +101,11 @@
 		<div id='details'></div>
 	</div>
 	<article>
-		<noscript>
 			<?php if ( isset( $query ) ) include verify( $query ); ?>
-		</noscript>
 	</article>
 	<footer>
 		<p>Designed by Didier FABERT&nbsp;&copy;&nbsp;|&nbsp;Valid HTML5 and CSS3</p>
 	</footer>
-	<noscript>
-		<div class="noscript">Pour une utilisation optimale, vous devez activer les scripts Javascript.
-		</div>
-	</noscript>
 </body>
 </html>
 <?php

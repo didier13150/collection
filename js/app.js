@@ -39,6 +39,9 @@ function init() {
 		}
 	);
 	$('#sort-container').show();
+	resizeArticle();
+	posPopup();
+
 }
 
 function bindItem( item ) {

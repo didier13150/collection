@@ -104,7 +104,7 @@
 	}
 
 ?>
-<script language="javascript">
+<script>
 	modifyRef();
 	<?php foreach( $occurencies as $item ):?>
 		bindItem( '<?php echo $item->id;?>' );
@@ -115,13 +115,18 @@
 	<ul class="search">
 	<?php foreach( $occurencies as $item ):?>
 		<li class="search">
-			<a href="./index.php?query=details&collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item" id="item-<?php echo $item->id;?>">
+			<a href="./index.php?query=details&amp;collection=<?php echo $collectionID;?>&amp;item=<?php echo $item->id;?>" class="item" id="item-<?php echo $item->id;?>">
 				<?php echo $item->title;?>
 			</a><br>
 			<?php if( $item->originalTitle != "" ):?>
 			(<?php echo $item->originalTitle;?>)
 			<?php endif;?>
-			de <?php echo $item->director;?> (<?php echo $item->year;?>)
+			<?php if( $item->director != "" ):?>
+			de <?php echo $item->director;?>
+			<?php endif;?>
+			<?php if( $item->year ):?>
+			(<?php echo $item->year;?>)
+			<?php endif;?>
 		</li>
 	<?php endforeach;?>
 	</ul>

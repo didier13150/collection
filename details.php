@@ -121,7 +121,7 @@
 		<?php endif;?>
 	</div>
 </form>
-<script language="javascript">
+<script>
 	$('#popup-title').html( '<?php echo htmlentities( $item->title );?>' );
 </script>
 <?php
