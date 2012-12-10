@@ -67,6 +67,8 @@
 		'director' => array(),
 	);
 
+	$films = array();
+
 	foreach( $collection->getItems() as $item )
 	{
 		/*echo $item->id . "->" . $item->title . "\n";
@@ -80,6 +82,21 @@
 		if ( $item->synopsis == "" ) $mistake['synopsis'][] = $item->title;
 		if ( ! $item->duration ) $mistake['duration'][] = $item->title;
 		if ( ! $item->director ) $mistake['director'][] = $item->title;
+
+		$title = (string) $item->title;
+		if ( array_key_exists( $title, $films ) )
+		{
+			$films[$title] += 1;
+		}
+		else
+		{
+			$films[$title] = 1;
+		}
+	}
+
+	foreach( $films as $title => $nb )
+	{
+		if ( $nb != 1 ) echo "\t$nb - $title\n";
 	}
 
 	if ( count ( $mistake['synopsis'] ) )

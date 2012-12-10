@@ -38,7 +38,7 @@ function init() {
 			$('#search-text').val( searchDefault );
 		}
 	);
-	$('a').attr( 'href', '#' );
+	$('#sort-container').show();
 }
 
 function bindItem( item ) {
@@ -112,7 +112,7 @@ function getItem( item )
 	setMainOpacity( 0.15 );
 	var arg = '';
 	if( parseInt( item ) >= 0 ) {
-		arg = '?collection=' + collection + '&item=' + item + '&ajax=1';
+		arg = '?collection=' + collection + '&item=' + item;
 	}
 	$.ajax({
 		url: 'details.php' + arg,
@@ -142,7 +142,6 @@ function getCollection( offset )
 		if ( sortBy ) {
 			arg += '&sort=' + sortBy;
 		}
-		arg += '&ajax=1';
 	}
 	$.ajax({
 		url: 'collection.php' + arg,
@@ -170,7 +169,7 @@ function search()
 		setMainOpacity( 1 );
 		return;
 	}
-	arg = '?collection=' + collection + '&search=' + target + '&ajax=1';
+	arg = '?collection=' + collection + '&search=' + target;
 	if ( sortBy ) {
 		arg += '&sort=' + sortBy;
 	}
@@ -179,8 +178,9 @@ function search()
 		success: function( data ) {
 			$('#details').html( data );
 		},
-		error: function() {
-			alert( 'Error reported when trying to search "' + target + '" on collection ' + collection );
+		error: function( jqXHR, strerror, status ) {
+			//alert( 'Error reported when trying to search "' + target + '" on collection ' + collection );
+			alert( arg + '\n' + strerror + ' : ' + status );
 			$('#popup').hide();
 			setMainOpacity( 1 );
 		}
@@ -229,3 +229,10 @@ function posPopup()
 	$('#popup').css( 'left', margin + 'px' );
 }
 
+function modifyRef()
+{
+	$('a').attr( 'href', '#' );
+	$('form').removeAttr( 'target' );
+	$('form').removeAttr( 'method' );
+	$('input').removeAttr( 'name' );
+}

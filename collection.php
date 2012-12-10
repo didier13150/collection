@@ -5,20 +5,31 @@
 
 	$collectionID = 0;
 	$page = 0;
-	$ajax = 0;
 	$sort = 'title';
 
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
 		$collectionID = $_GET['collection'];
 	}
+	elseif ( isset( $_SESSION['collection'] ) and ! empty( $_SESSION['collection'] ) )
+	{
+		$collectionID = $_SESSION['collection'];
+	}
 	if ( isset( $_GET['page'] ) and ! empty( $_GET['page'] ) )
 	{
 		$page = $_GET['page'];
 	}
+	elseif ( isset( $_SESSION['page'] ) and ! empty( $_SESSION['page'] ) )
+	{
+		$page = $_SESSION['page'];
+	}
 	if ( isset( $_GET['sort'] ) and ! empty( $_GET['sort'] ) )
 	{
 		$sort = $_GET['sort'];
+	}
+	elseif ( isset( $_SESSION['sort'] ) and ! empty( $_SESSION['sort'] ) )
+	{
+		$sort = $_SESSION['sort'];
 	}
 
 	$start = $page * $NB_ITEM_PER_PAGE;
@@ -59,23 +70,8 @@
 	$items = $collection->getItems( $start, $NB_ITEM_PER_PAGE );
 	$maxItem = $collection->count();
 ?>
-<?php if( ! $ajax ):?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Collection</title>
-	<meta name="AUTHOR" content="Didier Fabert"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-	<link type="text/css" rel="stylesheet" href="css/shared.css"/>
-	<link type="text/css" rel="stylesheet" href="css/screen.css" media="screen"/>
-	<!-- <link type="text/css" rel="stylesheet" href="css/print.css" media="print"/> -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/iutil.js"></script>
-	<script type="text/javascript" src="js/idrag.js"></script>
-<?php endif;?>
 <script language="javascript">
+	modifyRef();
 	collection = <?php echo $collectionID;?>;
 	<?php foreach( $items as $id => $item ):?>
 		bindItem( '<?php echo $item->id;?>' );
@@ -85,7 +81,6 @@
 	<?php endfor;?>
 	resizeArticle();
 	bindSelect();
-	$('a').attr( 'href', '#' );
 </script>
 <?php if( ! $ajax ):?>
 </head>
@@ -100,7 +95,7 @@
 					<?php if( ( $i * $NB_ITEM_PER_PAGE ) == $start ):?>
 						<span class="page-selected">&nbsp;<?php echo $i;?>&nbsp;</span>
 					<?php else:?>
-						&nbsp;<a href="./collection.php?collection=<?php echo $collectionID;?>&page=<?php echo $i;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
+						&nbsp;<a href="index.php?query=collection&collection=<?php echo $collectionID;?>&page=<?php echo $i;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
 				<?php endif;?>
 			<?php endfor;?>
 		</span>
@@ -128,15 +123,11 @@
 </p>
 <div id="thumbnails">
 	<?php foreach( $items as $id => $item ):?>
-	<a href="./details.php?collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item thumbnail-container" id="item-<?php echo $item->id;?>">
+	<a href="index.php?query=details&collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item thumbnail-container" id="item-<?php echo $item->id;?>">
 	<img class="thumbnail-<?php echo $THUMB_SIZE;?>" src="<?php echo $item->getThumbnail( $THUMB_SIZE );?>" alt="<?php echo $item->title;?>" title="<?php echo $item->title;?>">
 	</a>
 	<?php endforeach;?>
 </div>
-<?php if( ! $ajax ):?>
-</body>
-</html>
-<?php endif;?>
 <?php
 	$html = ob_get_clean();
 	echo $html;

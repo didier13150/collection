@@ -7,23 +7,22 @@
 	$collectionID = 0;
 	$sort = 'title';
 	$search = null;
-	$ajax = 0;
 
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
 		$collectionID = $_GET['collection'];
 	}
-	if ( isset( $_GET['search'] ) and ! empty( $_GET['search'] ) )
+	elseif ( isset( $_SESSION['collection'] ) and ! empty( $_SESSION['collection'] ) )
 	{
-		$search = removeAccents( $_GET['search'] );
+		$collectionID = $_SESSION['collection'];
 	}
 	if ( isset( $_GET['sort'] ) and ! empty( $_GET['sort'] ) )
 	{
 		$sort = $_GET['sort'];
 	}
-	if ( isset( $_GET['ajax'] ) and ! empty( $_GET['ajax'] ) )
+	if ( isset( $_GET['search'] ) and ! empty( $_GET['search'] ) )
 	{
-		$ajax = $_GET['ajax'];
+		$search = removeAccents( $_GET['search'] );
 	}
 
 	ob_start();
@@ -105,37 +104,18 @@
 	}
 
 ?>
-<?php if( ! $ajax ):?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Collection</title>
-	<meta name="AUTHOR" content="Didier Fabert"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-	<link type="text/css" rel="stylesheet" href="css/shared.css"/>
-	<link type="text/css" rel="stylesheet" href="css/screen.css" media="screen"/>
-	<!-- <link type="text/css" rel="stylesheet" href="css/print.css" media="print"/> -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/iutil.js"></script>
-	<script type="text/javascript" src="js/idrag.js"></script>
-<?php endif;?>
 <script language="javascript">
+	modifyRef();
 	<?php foreach( $occurencies as $item ):?>
 		bindItem( '<?php echo $item->id;?>' );
 	<?php endforeach;?>
 </script>
-<?php if( ! $ajax ):?>
-</head>
-<body>
-<?php endif;?>
 <form class="big">
 <?php if( count( $occurencies ) ):?>
 	<ul class="search">
 	<?php foreach( $occurencies as $item ):?>
 		<li class="search">
-			<a href="./details.php?collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item" id="item-<?php echo $item->id;?>">
+			<a href="./index.php?query=details&collection=<?php echo $collectionID;?>&item=<?php echo $item->id;?>" class="item" id="item-<?php echo $item->id;?>">
 				<?php echo $item->title;?>
 			</a><br>
 			<?php if( $item->originalTitle != "" ):?>
@@ -149,10 +129,6 @@
 	<span class="error">Aucun film ne correspond à la demande ("<?php echo $search;?>")</span>
 <?php endif;?>
 </form>
-<?php if( ! $ajax ):?>
-</body>
-</html>
-<?php endif;?>
 <?php
 	$html = ob_get_clean();
 	echo $html;

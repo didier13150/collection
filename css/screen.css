@@ -7,15 +7,15 @@ body, nav a {
 	background-color:LemonChiffon ;
 }
 
-noscript div{
+noscript div.noscript{
 	font-size:200%;
 	background-color:gold;
 	color:red;
 	border:red 1px solid;
-	margin:10px;
-	padding:10px 10px 10px 100px;
-
+	margin:10px 10px 100px 10px;
+	padding:10px 10px 10px 10px;
 }
+
 header {
 	display:block;
 	height:24px;
@@ -23,7 +23,7 @@ header {
 	padding:5px;
 	border-width:0 0 1px 0;
 }
-header span#top {
+header span#logo-top {
 	display:block;
 	width:64px;
 	height:64px;
@@ -598,4 +598,8 @@ span.error {
 	position: absolute;
 	top: 50px;
 	right: 10px;
+}
+
+#sort-container {
+	display: none;
 }
