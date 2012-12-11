@@ -66,18 +66,6 @@
 	$items = $collection->getItems( $start, $NB_ITEM_PER_PAGE );
 	$maxItem = $collection->count();
 ?>
-<script>
-	modifyRef();
-	collection = <?php echo $collectionID;?>;
-	<?php foreach( $items as $id => $item ):?>
-		bindItem( '<?php echo $item->id;?>' );
-	<?php endforeach;?>
-	<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
-		bindPage( '<?php echo $i;?>' );
-	<?php endfor;?>
-	resizeArticle();
-	bindSelect();
-</script>
 <div class="borded">
 	<span>
 		<span class="bold">Page</span>
@@ -118,6 +106,19 @@
 	</a>
 	<?php endforeach;?>
 </div>
+<script>
+	init( false );
+	modifyRef();
+	collection = <?php echo $collectionID;?>;
+	<?php foreach( $items as $id => $item ):?>
+		bindItem( '<?php echo $item->id;?>' );
+	<?php endforeach;?>
+	<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
+		bindPage( '<?php echo $i;?>' );
+	<?php endfor;?>
+	resizeArticle();
+	bindSelect();
+</script>
 <?php
 	$html = ob_get_clean();
 	echo $html;

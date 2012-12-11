@@ -51,7 +51,7 @@
 	<script type="text/javascript" src="js/idrag.js"></script>
 	<script type="text/javascript">
 		$(document).ready( function() {
-			init();
+			init( true );
 			modifyRef();
 			collection = 0;
 			sortBy = '<?php echo 'title';?>';

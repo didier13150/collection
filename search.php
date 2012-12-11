@@ -104,12 +104,6 @@
 	}
 
 ?>
-<script>
-	modifyRef();
-	<?php foreach( $occurencies as $item ):?>
-		bindItem( '<?php echo $item->id;?>' );
-	<?php endforeach;?>
-</script>
 <form class="big">
 <?php if( count( $occurencies ) ):?>
 	<ul class="search">
@@ -134,6 +128,13 @@
 	<span class="error">Aucun film ne correspond à la demande ("<?php echo $search;?>")</span>
 <?php endif;?>
 </form>
+<script>
+	init( false );
+	modifyRef();
+	<?php foreach( $occurencies as $item ):?>
+		bindItem( '<?php echo $item->id;?>' );
+	<?php endforeach;?>
+</script>
 <?php
 	$html = ob_get_clean();
 	echo $html;
