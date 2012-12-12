@@ -43,24 +43,32 @@
 		$collection = new SeriesCollection();
 	}
 
+
 	if( ! isset( $collection ) )
 	{
-		echo $COLLECTIONS[$collectionID]['type'] . " is not a valid type !";
+		echo  gettext( "Type is not valid" ) . " : " . $COLLECTIONS[$collectionID]['type'];
+		return 127;
+	}
+
+	if( ! isset( $COLLECTIONS[$collectionID] ) )
+	{
+		echo gettext( "Unknown collection ID" ) . " : $collectionID";
 		return 127;
 	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['file'] . ' : ' . gettext( 'File does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->setThumbsDir( $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . " directory does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . ' : ' . gettext( 'Directory does not exists or is not readable !' );
 		return 127;
 	}
+
 	if ( ! $collection->load() )
 	{
-		echo "Could not load collection !";
+		echo gettext( "Could not load collection's item !" );
 		return 127;
 	}
 	$collection->sort( $sort );
@@ -125,7 +133,7 @@
 	<?php endforeach;?>
 	</ul>
 <?php else:?>
-	<span class="error">Aucun film ne correspond à la demande ("<?php echo $search;?>")</span>
+	<span class="error"><?php echo gettext( 'No item match the query !' );?> ("<?php echo $search;?>")</span>
 <?php endif;?>
 </form>
 <script>

@@ -38,29 +38,29 @@
 
 	if( ! isset( $collection ) )
 	{
-		echo $COLLECTIONS[$collectionID]['type'] . " is not a valid type !";
+		echo  gettext( "Type is not valid" ) . " : " . $COLLECTIONS[$collectionID]['type'];
 		return 127;
 	}
 
 	if( ! isset( $COLLECTIONS[$collectionID] ) )
 	{
-		echo "$collectionID is an unknown collection !";
+		echo gettext( "Unknown collection ID" ) . " : $collectionID";
 		return 127;
 	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['file'] . ' : ' . gettext( 'File does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->setThumbsDir( $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . " directory does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . ' : ' . gettext( 'Directory does not exists or is not readable !' );
 		return 127;
 	}
 	$item = $collection->getItem( $itemID );
 	if ( ! $item )
 	{
-		echo "Could not load collection's item !";
+		echo gettext( "Could not load collection's item !" );
 		return 127;
 	}
 
@@ -73,30 +73,30 @@
 <?php endif;?>
 	<img class="thumbnail-<?php echo $DETAIL_SIZE;?>" src="<?php echo $item->getThumbnail( $DETAIL_SIZE );?>" alt="<?php echo $item->title;?>">
 	<div class="form-header">
-		<label for="detail-ID" class="fixed-length">ID</label>
+		<label for="detail-ID" class="fixed-length"><?php echo gettext( 'ID' );?></label>
 		<input type="text" id="detail-ID" value="<?php echo $item->id;?>">
-		<label for="detail-title" class="fixed-length">Titre</label>
+		<label for="detail-title" class="fixed-length"><?php echo gettext( 'Title' );?></label>
 		<input type="text" id="detail-title" value="<?php echo htmlentities( $item->title );?>">
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'film' ):?>
 			<?php if( $item->originalTitle != "" ):?>
-			<label for="detail-orig-title" class="fixed-length">Titre Original</label>
+			<label for="detail-orig-title" class="fixed-length"><?php echo gettext( 'Original Title' );?></label>
 			<input type="text" id="detail-orig-title" value="<?php echo htmlentities( $item->originalTitle );?>">
 			<?php endif;?>
 			<?php if( $item->year ):?>
-			<label for="detail-date" class="fixed-length">Date</label>
+			<label for="detail-date" class="fixed-length"><?php echo gettext( 'Date' );?></label>
 			<input type="text" id="detail-date" value="<?php echo htmlentities( $item->year );?>">
 			<?php endif;?>
 			<?php if( $item->duration ):?>
-			<label for="detail-duration" class="fixed-length">Dur&eacute;e</label>
+			<label for="detail-duration" class="fixed-length"><?php echo gettext( 'Duration' );?></label>
 			<input type="text" id="detail-duration" value="<?php echo htmlentities( $item->duration );?> min">
 			<?php endif;?>
 			<?php if( $item->director != "" ):?>
-			<label for="detail-director" class="fixed-length">R&eacute;alisateur</label>
+			<label for="detail-director" class="fixed-length"><?php echo gettext( 'Director' );?></label>
 			<input type="text" id="detail-director" value="<?php echo htmlentities( $item->director );?>">
 			<?php endif;?>
 		<?php endif;?>
 		<div id="detail-rating" >
-			<span class="left">Note</span>
+			<span class="left"><?php echo gettext( 'Rating' );?></span>
 			<?php for( $i = 0 ; $i < $item->rating ; $i++ ): ?>
 			<span class="icon icon-rating"></span>
 			<?php endfor; ?>
@@ -108,10 +108,10 @@
 	<div class="form-body">
 		<div class="synopsis" id="detail-summary"><?php echo htmlentities( $item->synopsis );?></div>
 		<?php if( count( $item->actors ) ):?>
-		<div class="synopsis">Acteurs: <?php echo $item->getJoinActorList();?></div>
+		<div class="synopsis"><?php echo gettext( 'Actors' );?>: <?php echo $item->getJoinActorList();?></div>
 		<?php endif;?>
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'series' ):?>
-			<div class="synopsis">Liste des &eacute;pisodes
+			<div class="synopsis"><?php echo gettext( 'Series episode list' );?>Liste des &eacute;pisodes
 				<ul class="episode">
 				<?php foreach( $item->getEpisodeList() as $episode ):?>
 					<li class="episode"><?php echo $episode;?></li>

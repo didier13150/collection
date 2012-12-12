@@ -3,6 +3,11 @@ var collection = 0;
 var searchDefault;
 var sortBy;
 var defaultSortBy;
+var collectionErrorStr = 'Error';
+var itemErrorStr = 'Error';
+var searchErrorStr = 'Error';
+var searchTitle = 'Search';
+var detailsTitle = 'Details';
 
 function init( full ) {
 	if ( full )
@@ -111,7 +116,7 @@ function setMainOpacity( opacity )
 
 function getItem( item )
 {
-	$('#popup-title').html( 'Collection - D&eacute;tails' );
+	$('#popup-title').html( 'Collection - ' + detailsTitle );
 	setLoader( '#details', '#popup', 'loader' );
 	$('#popup').show();
 	setMainOpacity( 0.15 );
@@ -125,7 +130,7 @@ function getItem( item )
 			$('#details').html( data );
 		},
 		error: function() {
-			alert( 'Error reported when trying to get details about item ' + item + ' on collection ' + collection );
+			alert( itemErrorStr.replace( "%item", item ).replace( "%collection", collection ) );
 			$('#popup').hide();
 			setMainOpacity( 1 );
 		}
@@ -155,14 +160,14 @@ function getCollection( offset )
 		},
 		error: function() {
 			$('article').html( '' );
-			alert( 'Error reported when trying to get collection ' + collection );
+			alert( collectionErrorStr.replace( "%collection", collection ) );
 		}
 	});
 }
 
 function search()
 {
-	$('#popup-title').html( 'Collection - Recherche' );
+	$('#popup-title').html( 'Collection - ' + searchTitle );
 	setLoader( '#details', '#popup', 'loader' );
 	$('#popup').show();
 	setMainOpacity( 0.15 );
@@ -184,8 +189,7 @@ function search()
 			$('#details').html( data );
 		},
 		error: function( jqXHR, strerror, status ) {
-			//alert( 'Error reported when trying to search "' + target + '" on collection ' + collection );
-			alert( arg + '\n' + strerror + ' : ' + status );
+			alert( searchErrorStr.replace( "%target", target ).replace( "%collection", collection ) );
 			$('#popup').hide();
 			setMainOpacity( 1 );
 		}

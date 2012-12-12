@@ -39,24 +39,31 @@
 		$collection = new SeriesCollection();
 	}
 
+
 	if( ! isset( $collection ) )
 	{
-		echo $COLLECTIONS[$collectionID]['type'] . " is not a valid type !";
+		echo  gettext( "Type is not valid" ) . " : " . $COLLECTIONS[$collectionID]['type'];
+		return 127;
+	}
+
+	if( ! isset( $COLLECTIONS[$collectionID] ) )
+	{
+		echo gettext( "Unknown collection ID" ) . " : $collectionID";
 		return 127;
 	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['file'] . " file does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['file'] . ' : ' . gettext( 'File does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->setThumbsDir( $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . " directory does not exists or is not readable !";
+		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . ' : ' . gettext( 'Directory does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->load() )
 	{
-		echo "Could not load collection !";
+		echo gettext( "Could not load collection's item !" );
 		return 127;
 	}
 
@@ -79,21 +86,25 @@
 	</span>
 	<span class="right collection-data">
 		<span class="bold"><?php echo $maxItem;?></span>
-		&eacute;l&eacute;ment<?php if ( count( $items ) > 1 ) echo 's';?> dans la collection
+			<?php if ( count( $items ) > 1 ):?>
+				<?php echo gettext( 'Items on collection' );?>
+			<?php else:?>
+				<?php echo gettext( 'Item on collection' );?>
+			<?php endif;?>
 	</span>
 </div>
 <div id="sort-container">
-	<label for="sort-fields">Class&eacute;s par </label>
+	<label for="sort-fields"><?php echo gettext( 'Sort by' );?></label>
 	<select id="sort-fields">
-		<optgroup label="Options générales">
-			<option value="id"<?php if ( $sort == 'id' ) echo ' selected';?>>Identifiant</option>
-			<option value="title"<?php if ( $sort == 'title' ) echo ' selected';?>>Titre</option>
+		<optgroup label="<?php echo gettext( 'Common options' );?>">
+			<option value="id"<?php if ( $sort == 'id' ) echo ' selected';?>><?php echo gettext( 'Identifiant' );?></option>
+			<option value="title"<?php if ( $sort == 'title' ) echo ' selected';?>><?php echo gettext( 'Title' );?></option>
 		</optgroup>
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'film' ):?>
-			<optgroup label="Options pour les films">
-				<option value="originalTitle"<?php if ( $sort == 'originalTitle' ) echo ' selected';?>>Titre original</option>
-				<option value="year"<?php if ( $sort == 'year' ) echo ' selected';?>>Ann&eacute;e</option>
-				<option value="duration"<?php if ( $sort == 'duration' ) echo ' selected';?>>Dur&eacute;e</option>
+			<optgroup label="<?php echo gettext( 'Film options' );?>">
+				<option value="originalTitle"<?php if ( $sort == 'originalTitle' ) echo ' selected';?>><?php echo gettext( 'Original Title' );?></option>
+				<option value="year"<?php if ( $sort == 'year' ) echo ' selected';?>><?php echo gettext( 'Year' );?></option>
+				<option value="duration"<?php if ( $sort == 'duration' ) echo ' selected';?>><?php echo gettext( 'Duration' );?></option>
 			</optgroup>
 		<?php endif;?>
 	</select>

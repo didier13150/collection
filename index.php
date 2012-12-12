@@ -2,6 +2,7 @@
 
 	include_once( 'settings.php' );
 	include_once( 'include/functions.php' );
+
 	session_start();
 
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
@@ -32,6 +33,23 @@
 	{
 		$query = 'collection';
 	}
+	if ( isset( $_GET['language'] ) and ! empty( $_GET['language'] ) )
+	{
+		$_SESSION['language'] = $_GET['language'];
+	}
+	else
+	{
+		$_SESSION['language'] = $DEFAULT_LANGUAGE;
+	}
+	// I18N support information here
+	$language = $_SESSION['language'];
+	putenv( "LANG=$language" );
+	setlocale( LC_ALL, $language );
+
+	// Set the text domain as 'messages'
+	$domain = 'messages';
+	bindtextdomain( $domain, "/home/didier/public/collection/po" );
+	textdomain( $domain );
 	ob_start();
 ?>
 
@@ -56,7 +74,12 @@
 			collection = 0;
 			sortBy = '<?php echo 'title';?>';
 			defaultSortBy = '<?php echo 'title';?>';
-			searchDefault = '<?php echo 'Chercher un film';?>';
+			searchDefault = '<?php echo gettext( 'Search a video' );?>';
+			collectionErrorStr = '<?php echo gettext( 'Error reported when trying to get collection %collection' );?>';
+			itemErrorStr = '<?php echo gettext( 'Error reported when trying to get details about item %item on collection %collection' );?>';
+			searchErrorStr = '<?php echo gettext( 'Error reported when trying to search "%target" on collection %collection' );?>';
+			searchTitle = '<?php echo gettext( 'Search' );?>';
+			detailsTitle = '<?php echo gettext( 'Details' );?>';
 			<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
 				bindTab( '<?php echo $id;?>' );
 			<?php endforeach;?>
@@ -67,14 +90,14 @@
 </head>
 <body>
 	<noscript>
-		<div class="noscript">Pour une utilisation optimale, vous devez activer les scripts Javascript.
+		<div class="noscript"><?php echo gettext( 'Pour une utilisation optimale, vous devez activer les scripts Javascript.' );?>
 		</div>
 	</noscript>
 	<header>
 		<span class="logo" id="logo-top"></span>
 		<hgroup>
 			<h1>Collection</h1>
-			<h2>Vid&eacute;o</h2>
+			<h2><?php echo gettext( 'Video' );?></h2>
 		</hgroup>
 		<form id="search-box" method="GET" target="index.php">
 			<input type="text" id="search-text" value="" name="search">
@@ -92,7 +115,7 @@
 	</nav>
 	<div id="popup">
 		<p>
-			<span id="popup-title">Collection - D&eacute;tails</span>
+			<span id="popup-title"><?php echo gettext( 'Details' );?></span>
 			<span class="right">
 				<span class="icon icon-move"></span>
 				<span class="icon icon-close"></span>

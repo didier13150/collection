@@ -71,4 +71,9 @@
 		4 => array( 'width' => 200, 'height' => 280 ),
 	);
 
+	/*
+	 * Default language
+	 */
+	$DEFAULT_LANGUAGE = 'fr';
+
 ?>
