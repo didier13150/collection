@@ -63,4 +63,12 @@
 	 */
 	$NB_ITEM_PER_PAGE = 40;
 
+	$SIZE_OF_THUMBNAILS = array(
+		0 => array( 'width' => 54, 'height' => 75 ),
+		1 => array( 'width' => 86, 'height' => 120 ),
+		2 => array( 'width' => 108, 'height' => 151 ),
+		3 => array( 'width' => 162, 'height' => 226 ),
+		4 => array( 'width' => 200, 'height' => 280 ),
+	);
+
 ?>

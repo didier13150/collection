@@ -515,10 +515,22 @@ li.search {
 }
 
 a.page {
-	font-weight: normal;
+	font-weight: bold;
 	font-size: 100%;
-	padding: 0 0 0 2px;
+	padding: 0 6px 0 8px;
 	color: inherit;
+	border-left: steelblue 1px solid;
+	border-right: steelblue 1px solid;
+	border-bottom: steelblue 1px solid;
+	border-radius: 0 0 4px 4px;
+	background-image:url("../img/bg-item.png");
+	background-repeat:repeat-x;
+	background-position:50% 50%;
+	float: left;
+}
+
+a.page:hover {
+	background-color:lightgrey;
 }
 
 span.page-selected {
@@ -531,10 +543,9 @@ span.page-selected {
 	background-repeat:repeat-x;
 	background-position:50% 50%;
 	color:LemonChiffon ;
-	border-left: steelblue 1px solid;
-	border-right: steelblue 1px solid;
 	border-bottom: steelblue 1px solid;
 	border-radius: 0 0 4px 4px;
+	float: left;
 }
 
 form#search-box {

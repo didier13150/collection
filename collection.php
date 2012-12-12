@@ -68,13 +68,12 @@
 ?>
 <div class="borded">
 	<span>
-		<span class="bold">Page</span>
+		<span class="left bold">Page</span>
 		<?php for( $i = 0 ; $i <= intval( $maxItem / $NB_ITEM_PER_PAGE ) ; $i++ ):?>
-			<?php if ( $i != 0 ) echo "|";?>
-				<?php if( ( $i * $NB_ITEM_PER_PAGE ) == $start ):?>
-					<span class="page-selected">&nbsp;<?php echo $i;?>&nbsp;</span>
-				<?php else:?>
-					&nbsp;<a href="index.php?query=collection&amp;collection=<?php echo $collectionID;?>&amp;page=<?php echo $i;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
+			<?php if( ( $i * $NB_ITEM_PER_PAGE ) == $start ):?>
+				<span class="page-selected">&nbsp;<?php echo $i;?>&nbsp;</span>
+			<?php else:?>
+				&nbsp;<a href="index.php?query=collection&amp;collection=<?php echo $collectionID;?>&amp;page=<?php echo $i;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
 			<?php endif;?>
 		<?php endfor;?>
 	</span>

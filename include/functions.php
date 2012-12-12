@@ -32,4 +32,14 @@
 		}
 		return 'index.php';
 	}
+
+	function getThumbnailWidth( $thumb_size )
+	{
+		return $SIZE_OF_THUMBNAILS[$thumb_size]['width'];
+	}
+
+	function getThumbnailHeight( $thumb_size )
+	{
+		return $SIZE_OF_THUMBNAILS[$thumb_size]['height'];
+	}
 ?>

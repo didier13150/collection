@@ -4,8 +4,8 @@ var searchDefault;
 var sortBy;
 var defaultSortBy;
 
-function init( total ) {
-	if ( total )
+function init( full ) {
+	if ( full )
 	{
 		bgcolor = $('body').css( 'background-color' );
 		$( '.icon-close' ).on(
