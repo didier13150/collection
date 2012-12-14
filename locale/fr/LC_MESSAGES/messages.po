@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-12 22:17+0100\n"
-"PO-Revision-Date: 2012-12-12 22:34+0100\n"
+"POT-Creation-Date: 2012-12-14 13:32+0100\n"
+"PO-Revision-Date: 2012-12-14 13:32+0100\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: fr\n"
@@ -17,100 +17,96 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: collection.php:45 details.php:41 search.php:49
+#: collection.php:67 details.php:62 search.php:71
 msgid "Type is not valid"
 msgstr "Le type n'est pas valide"
 
-#: collection.php:51 details.php:47 search.php:55
+#: collection.php:73 details.php:68 search.php:77
 msgid "Unknown collection ID"
 msgstr "Identifiant de collection inconnu"
 
-#: collection.php:56 details.php:52 search.php:60
+#: collection.php:78 details.php:73 search.php:82
 msgid "File does not exists or is not readable !"
 msgstr "Le fichier n'existe pas ou n'est pas accessible en lecture !"
 
-#: collection.php:61 details.php:57 search.php:65
+#: collection.php:83 details.php:78 search.php:87
 msgid "Directory does not exists or is not readable !"
 msgstr "Le dossier n'existe pas ou n'est pas accessible en lecture !"
 
-#: collection.php:66 details.php:63 search.php:71
+#: collection.php:88 details.php:84 search.php:93
 msgid "Could not load collection's item !"
 msgstr "Impossible de charger la collection !"
 
-#: collection.php:90
+#: collection.php:112
 msgid "Items on collection"
 msgstr "Éléments dans la collection"
 
-#: collection.php:92
+#: collection.php:114
 msgid "Item on collection"
 msgstr "Élément dans la collection"
 
-#: collection.php:97
+#: collection.php:119
 msgid "Sort by"
 msgstr "Trier par"
 
-#: collection.php:99
+#: collection.php:121
 msgid "Common options"
 msgstr "Options générales"
 
-#: collection.php:100
+#: collection.php:122 details.php:97
 msgid "Identifiant"
 msgstr "Identifiant"
 
-#: collection.php:101 details.php:78
+#: collection.php:123 details.php:99
 msgid "Title"
 msgstr "Titre"
 
-#: collection.php:104
+#: collection.php:126
 msgid "Film options"
 msgstr "Options pour les films"
 
-#: collection.php:105 details.php:82
+#: collection.php:127 details.php:103
 msgid "Original Title"
 msgstr "Titre Original"
 
-#: collection.php:106
+#: collection.php:128
 msgid "Year"
 msgstr "année"
 
-#: collection.php:107 details.php:90
+#: collection.php:129 details.php:111
 msgid "Duration"
 msgstr "Durée"
 
-#: details.php:76
-msgid "ID"
-msgstr "ID"
-
-#: details.php:86
+#: details.php:107
 msgid "Date"
 msgstr "Date"
 
-#: details.php:94
+#: details.php:115
 msgid "Director"
 msgstr "Réalisateur"
 
-#: details.php:99
+#: details.php:120
 msgid "Rating"
 msgstr "Note"
 
-#: details.php:111
+#: details.php:132
 msgid "Actors"
 msgstr "Acteurs"
 
-#: details.php:114
+#: details.php:135
 msgid "Series episode list"
 msgstr "Liste des épisodes de la série"
 
-#: index.php:77
+#: index.php:76
 msgid "Search a video"
 msgstr "Chercher une vidéo"
 
-#: index.php:78
+#: index.php:77
 #, php-format
 msgid "Error reported when trying to get collection %collection"
 msgstr "Erreur rapportée durant le chargement de la collection %collection"
 
-#: index.php:79
+#: index.php:78
 msgid ""
 "Error reported when trying to get details about item %item on collection "
 "%collection"
@@ -118,32 +114,38 @@ msgstr ""
 "Erreur rapportée durant le chargement des détails de l'élément %item dans la "
 "collection %collection"
 
-#: index.php:80
+#: index.php:79
 msgid ""
 "Error reported when trying to search \"%target\" on collection %collection"
 msgstr ""
-"Erreur rapportée durant la recherche de \"%target\" dans la collection %"
-"collection"
+"Erreur rapportée durant la recherche de \"%target\" dans la collection "
+"%collection"
 
-#: index.php:81
+#: index.php:80 index.php:106
 msgid "Search"
 msgstr "Recherche"
 
-#: index.php:82 index.php:118
+#: index.php:81 index.php:120
 msgid "Details"
 msgstr "Détails"
 
-#: index.php:93
-msgid "You must activate javascript for an optimal using"
+#: index.php:95
+#, fuzzy
+msgid "You must activate javascript for an optimal using."
 msgstr ""
 "Pour une utilisation optimale, vous devez activer les scripts Javascript."
 
-#: index.php:100
+#: index.php:102
 msgid "Video"
 msgstr "Vidéo"
 
-#: search.php:136
+#: search.php:52
+msgid "Nothing to search !!!"
+msgstr "Rien à chercher !!!"
+
+#: search.php:159
 msgid "No item match the query !"
 msgstr "Aucun élément ne correspond aux critères de recherche"
 
-
+#~ msgid "ID"
+#~ msgstr "ID"

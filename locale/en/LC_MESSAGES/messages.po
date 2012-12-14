@@ -1,0 +1,123 @@
+#: collection.php:67 details.php:62 search.php:71
+msgid "Type is not valid"
+msgstr ""
+
+#: collection.php:73 details.php:68 search.php:77
+msgid "Unknown collection ID"
+msgstr ""
+
+#: collection.php:78 details.php:73 search.php:82
+msgid "File does not exists or is not readable !"
+msgstr ""
+
+#: collection.php:83 details.php:78 search.php:87
+msgid "Directory does not exists or is not readable !"
+msgstr ""
+
+#: collection.php:88 details.php:84 search.php:93
+msgid "Could not load collection's item !"
+msgstr ""
+
+#: collection.php:112
+msgid "Items on collection"
+msgstr ""
+
+#: collection.php:114
+msgid "Item on collection"
+msgstr ""
+
+#: collection.php:119
+msgid "Sort by"
+msgstr ""
+
+#: collection.php:121
+msgid "Common options"
+msgstr ""
+
+#: collection.php:122 details.php:97
+msgid "Identifiant"
+msgstr ""
+
+#: collection.php:123 details.php:99
+msgid "Title"
+msgstr ""
+
+#: collection.php:126
+msgid "Film options"
+msgstr ""
+
+#: collection.php:127 details.php:103
+msgid "Original Title"
+msgstr ""
+
+#: collection.php:128
+msgid "Year"
+msgstr ""
+
+#: collection.php:129 details.php:111
+msgid "Duration"
+msgstr ""
+
+#: details.php:107
+msgid "Date"
+msgstr ""
+
+#: details.php:115
+msgid "Director"
+msgstr ""
+
+#: details.php:120
+msgid "Rating"
+msgstr ""
+
+#: details.php:132
+msgid "Actors"
+msgstr ""
+
+#: details.php:135
+msgid "Series episode list"
+msgstr ""
+
+#: index.php:76
+msgid "Search a video"
+msgstr ""
+
+#: index.php:77
+#, php-format
+msgid "Error reported when trying to get collection %collection"
+msgstr ""
+
+#: index.php:78
+msgid ""
+"Error reported when trying to get details about item %item on collection "
+"%collection"
+msgstr ""
+
+#: index.php:79
+msgid ""
+"Error reported when trying to search \"%target\" on collection %collection"
+msgstr ""
+
+#: index.php:80 index.php:106
+msgid "Search"
+msgstr ""
+
+#: index.php:81 index.php:120
+msgid "Details"
+msgstr ""
+
+#: index.php:95
+msgid "You must activate javascript for an optimal using."
+msgstr ""
+
+#: index.php:102
+msgid "Video"
+msgstr ""
+
+#: search.php:52
+msgid "Nothing to search !!!"
+msgstr ""
+
+#: search.php:159
+msgid "No item match the query !"
+msgstr ""
