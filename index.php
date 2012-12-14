@@ -92,7 +92,7 @@
 </head>
 <body>
 	<noscript>
-		<div class="noscript"><?php echo i18n2html( 'You must activate javascript for an optimal using.' );?>
+		<div class="noscript"><?php echo i18n2html( 'You must enable javascript for full fonctionalities.' );?>
 		</div>
 	</noscript>
 	<header>

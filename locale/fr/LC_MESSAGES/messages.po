@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-14 13:32+0100\n"
-"PO-Revision-Date: 2012-12-14 13:32+0100\n"
+"POT-Creation-Date: 2012-12-14 18:26+0100\n"
+"PO-Revision-Date: 2012-12-14 18:26+0100\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: fr\n"
@@ -130,8 +130,7 @@ msgid "Details"
 msgstr "Détails"
 
 #: index.php:95
-#, fuzzy
-msgid "You must activate javascript for an optimal using."
+msgid "You must enable javascript for full fonctionalities."
 msgstr ""
 "Pour une utilisation optimale, vous devez activer les scripts Javascript."
 

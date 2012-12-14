@@ -1,26 +1,35 @@
-LANGUAGES := en fr
+LOCALE := locale
+POT := collection.pot
+PO := messages
 
-all: message merge mo info
+all: locales mo
+locales: extract merge info
 
 mo:
-	@echo "Compile messages"
-	@for lang in $(LANGUAGES) ; do \
-		msgfmt -o locale/$$lang/LC_MESSAGES/messages.mo locale/$$lang/LC_MESSAGES/messages.po ; \
+	@echo "Make binary gettext files"
+	@for lang in $(shell ls $(LOCALE)) ; do \
+		if [ -d "$(LOCALE)/$$lang/LC_MESSAGES" ] ; then \
+			msgfmt -o $(LOCALE)/$$lang/LC_MESSAGES/$(PO).mo $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po ; \
+		fi ; \
 	done
 
-message:
-	@echo "Extract messages"
-	@xgettext -ki18n2html -o collection.pot *.php
+extract:
+	@echo "Extract messages from sources"
+	@xgettext -ki18n2html -o $(POT).pot *.php
 
-merge:
-	@echo "Merge messages"
-	@for lang in $(LANGUAGES) ; do \
-		mv locale/$$lang/LC_MESSAGES/messages.po locale/$$lang/LC_MESSAGES/old.po; \
-		echo -ne "\t$$lang "; \
-		msgmerge locale/$$lang/LC_MESSAGES/old.po collection.pot -o locale/$$lang/LC_MESSAGES/messages.po ; \
-		rm locale/$$lang/LC_MESSAGES/old.po; \
+merge: extract
+	@echo "Merge messages on po files"
+	@for lang in $(shell ls $(LOCALE)) ; do \
+		if [ -d "$(LOCALE)/$$lang/LC_MESSAGES" ] ; then \
+			mv $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po $(LOCALE)/$$lang/LC_MESSAGES/old.po; \
+			echo -ne "\t$$lang "; \
+			msgmerge $(LOCALE)/$$lang/LC_MESSAGES/old.po $(POT).pot -o $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po ; \
+			rm $(LOCALE)/$$lang/LC_MESSAGES/old.po; \
+			echo -ne "\t\t";\
+			msgfmt --statistics $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po; \
+		fi ; \
 	done
 
 info:
-	@echo "Please, translate po file and relaunch this command"
-	@echo "make mo"
+	@echo "Please, translate po file and launch this command: make"
+

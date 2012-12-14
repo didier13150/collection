@@ -107,7 +107,7 @@ msgid "Details"
 msgstr ""
 
 #: index.php:95
-msgid "You must activate javascript for an optimal using."
+msgid "You must enable javascript for full fonctionalities."
 msgstr ""
 
 #: index.php:102
