@@ -1,11 +1,16 @@
 <?php
+	require_once( 'gettext/gettext.inc' );
 	include_once( 'class/collection.class.php' );
 	include_once( 'class/item.class.php' );
+	include_once( 'include/functions.php' );
 	include_once( 'settings.php' );
+
+	defined( 'APPLICATION_PATH' ) || define( 'APPLICATION_PATH', dirname(__FILE__) );
 
 	$collectionID = 0;
 	$page = 0;
 	$sort = 'title';
+	$language = $DEFAULT_LANGUAGE;
 
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
@@ -27,6 +32,14 @@
 	{
 		$sort = $_GET['sort'];
 	}
+	if ( isset( $_GET['lang'] ) and ! empty( $_GET['lang'] ) )
+	{
+		$language = $_GET['lang'];
+	}
+	elseif ( isset( $_SESSION['language'] ) and ! empty( $_SESSION['language'] ) )
+	{
+		$language = $_SESSION['language'];
+	}
 
 	$start = $page * $NB_ITEM_PER_PAGE;
 	$collection = null;
@@ -39,31 +52,40 @@
 		$collection = new SeriesCollection();
 	}
 
+	// I18N support information here
+	putenv( "LANG=$language" );
+	T_setlocale( LC_ALL, $language );
+
+	// Set the text domain as 'messages'
+	$domain = 'messages';
+	T_bindtextdomain( $domain, APPLICATION_PATH . "/locale" );
+	T_bind_textdomain_codeset( $domain, 'UTF-8' );
+	T_textdomain( $domain );
 
 	if( ! isset( $collection ) )
 	{
-		echo  gettext( "Type is not valid" ) . " : " . $COLLECTIONS[$collectionID]['type'];
+		echo  i18n2html( "Type is not valid" ) . " : " . $COLLECTIONS[$collectionID]['type'];
 		return 127;
 	}
 
 	if( ! isset( $COLLECTIONS[$collectionID] ) )
 	{
-		echo gettext( "Unknown collection ID" ) . " : $collectionID";
+		echo i18n2html( "Unknown collection ID" ) . " : $collectionID";
 		return 127;
 	}
 	if ( ! $collection->setFilename( $COLLECTIONS[$collectionID]['file'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['file'] . ' : ' . gettext( 'File does not exists or is not readable !' );
+		echo $COLLECTIONS[$collectionID]['file'] . ' : ' . i18n2html( 'File does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->setThumbsDir( $COLLECTIONS[$collectionID]['thumbs-dir'] ) )
 	{
-		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . ' : ' . gettext( 'Directory does not exists or is not readable !' );
+		echo $COLLECTIONS[$collectionID]['thumbs-dir'] . ' : ' . i18n2html( 'Directory does not exists or is not readable !' );
 		return 127;
 	}
 	if ( ! $collection->load() )
 	{
-		echo gettext( "Could not load collection's item !" );
+		echo i18n2html( "Could not load collection's item !" );
 		return 127;
 	}
 
@@ -80,38 +102,38 @@
 			<?php if( ( $i * $NB_ITEM_PER_PAGE ) == $start ):?>
 				<span class="page-selected">&nbsp;<?php echo $i;?>&nbsp;</span>
 			<?php else:?>
-				&nbsp;<a href="index.php?query=collection&amp;collection=<?php echo $collectionID;?>&amp;page=<?php echo $i;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
+				&nbsp;<a href="index.php?query=collection&amp;collection=<?php echo $collectionID;?>&amp;page=<?php echo $i;?>&amp;lang=<?php echo $language;?>" class="<?php echo "page";?>" id="page-<?php echo $i;?>"><?php echo $i;?>&nbsp;</a>
 			<?php endif;?>
 		<?php endfor;?>
 	</span>
 	<span class="right collection-data">
 		<span class="bold"><?php echo $maxItem;?></span>
 			<?php if ( count( $items ) > 1 ):?>
-				<?php echo gettext( 'Items on collection' );?>
+				<?php echo i18n2html( 'Items on collection' );?>
 			<?php else:?>
-				<?php echo gettext( 'Item on collection' );?>
+				<?php echo i18n2html( 'Item on collection' );?>
 			<?php endif;?>
 	</span>
 </div>
 <div id="sort-container">
-	<label for="sort-fields"><?php echo gettext( 'Sort by' );?></label>
+	<label for="sort-fields"><?php echo i18n2html( 'Sort by' );?></label>
 	<select id="sort-fields">
-		<optgroup label="<?php echo gettext( 'Common options' );?>">
-			<option value="id"<?php if ( $sort == 'id' ) echo ' selected';?>><?php echo gettext( 'Identifiant' );?></option>
-			<option value="title"<?php if ( $sort == 'title' ) echo ' selected';?>><?php echo gettext( 'Title' );?></option>
+		<optgroup label="<?php echo i18n2html( 'Common options' );?>">
+			<option value="id"<?php if ( $sort == 'id' ) echo ' selected';?>><?php echo i18n2html( 'Identifiant' );?></option>
+			<option value="title"<?php if ( $sort == 'title' ) echo ' selected';?>><?php echo i18n2html( 'Title' );?></option>
 		</optgroup>
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'film' ):?>
-			<optgroup label="<?php echo gettext( 'Film options' );?>">
-				<option value="originalTitle"<?php if ( $sort == 'originalTitle' ) echo ' selected';?>><?php echo gettext( 'Original Title' );?></option>
-				<option value="year"<?php if ( $sort == 'year' ) echo ' selected';?>><?php echo gettext( 'Year' );?></option>
-				<option value="duration"<?php if ( $sort == 'duration' ) echo ' selected';?>><?php echo gettext( 'Duration' );?></option>
+			<optgroup label="<?php echo i18n2html( 'Film options' );?>">
+				<option value="originalTitle"<?php if ( $sort == 'originalTitle' ) echo ' selected';?>><?php echo i18n2html( 'Original Title' );?></option>
+				<option value="year"<?php if ( $sort == 'year' ) echo ' selected';?>><?php echo i18n2html( 'Year' );?></option>
+				<option value="duration"<?php if ( $sort == 'duration' ) echo ' selected';?>><?php echo i18n2html( 'Duration' );?></option>
 			</optgroup>
 		<?php endif;?>
 	</select>
 </div>
 <div id="thumbnails">
 	<?php foreach( $items as $id => $item ):?>
-	<a href="index.php?query=details&amp;collection=<?php echo $collectionID;?>&amp;item=<?php echo $item->id;?>" class="item thumbnail-container" id="item-<?php echo $item->id;?>">
+	<a href="index.php?query=details&amp;collection=<?php echo $collectionID;?>&amp;item=<?php echo $item->id;?>&amp;lang=<?php echo $language;?>" class="item thumbnail-container" id="item-<?php echo $item->id;?>">
 	<img class="thumbnail-<?php echo $THUMB_SIZE;?>" src="<?php echo $item->getThumbnail( $THUMB_SIZE );?>" alt="<?php echo $item->title;?>" title="<?php echo $item->title;?>">
 	</a>
 	<?php endforeach;?>

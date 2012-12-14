@@ -130,8 +130,7 @@ msgid "Details"
 msgstr ""
 
 #: index.php:93
-msgid ""
-"Pour une utilisation optimale, vous devez activer les scripts Javascript."
+msgid "You must activate javascript for an optimal using"
 msgstr ""
 
 #: index.php:100

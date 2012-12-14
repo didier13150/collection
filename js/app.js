@@ -8,6 +8,7 @@ var itemErrorStr = 'Error';
 var searchErrorStr = 'Error';
 var searchTitle = 'Search';
 var detailsTitle = 'Details';
+var lang = 'en';
 
 function init( full ) {
 	if ( full )
@@ -122,7 +123,7 @@ function getItem( item )
 	setMainOpacity( 0.15 );
 	var arg = '';
 	if( parseInt( item ) >= 0 ) {
-		arg = '?collection=' + collection + '&item=' + item;
+		arg = '?collection=' + collection + '&item=' + item + '&lang=' + lang;
 	}
 	$.ajax({
 		url: 'details.php' + arg,
@@ -152,6 +153,7 @@ function getCollection( offset )
 		if ( sortBy ) {
 			arg += '&sort=' + sortBy;
 		}
+		arg += '&lang=' + lang;
 	}
 	$.ajax({
 		url: 'collection.php' + arg,
@@ -173,16 +175,14 @@ function search()
 	setMainOpacity( 0.15 );
 	var arg = '';
 	var target = $('#search-text').val();
-	if( target == '' ) {
-		alert( 'Nothing to find' );
-		$('#popup').hide();
-		setMainOpacity( 1 );
-		return;
+	if( target == searchDefault ) {
+		target = '';
 	}
 	arg = '?collection=' + collection + '&search=' + target;
 	if ( sortBy ) {
 		arg += '&sort=' + sortBy;
 	}
+	arg += '&lang=' + lang;
 	$.ajax({
 		url: 'search.php' + arg,
 		success: function( data ) {

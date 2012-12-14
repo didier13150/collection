@@ -42,4 +42,9 @@
 	{
 		return $SIZE_OF_THUMBNAILS[$thumb_size]['height'];
 	}
+
+	function i18n2html( $text )
+	{
+		return preg_replace( '/\'/', '\\\'', T_( $text ) );
+	}
 ?>

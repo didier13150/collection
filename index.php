@@ -1,9 +1,12 @@
 <?php
-
-	include_once( 'settings.php' );
+	require_once( 'gettext/gettext.inc' );
 	include_once( 'include/functions.php' );
+	include_once( 'settings.php' );
+
+	defined( 'APPLICATION_PATH' ) || define( 'APPLICATION_PATH', dirname(__FILE__) );
 
 	session_start();
+	$_SESSION['language'] = $DEFAULT_LANGUAGE;
 
 	if ( isset( $_GET['collection'] ) and ! empty( $_GET['collection'] ) )
 	{
@@ -37,19 +40,17 @@
 	{
 		$_SESSION['language'] = $_GET['language'];
 	}
-	else
-	{
-		$_SESSION['language'] = $DEFAULT_LANGUAGE;
-	}
+
 	// I18N support information here
 	$language = $_SESSION['language'];
 	putenv( "LANG=$language" );
-	setlocale( LC_ALL, $language );
+	T_setlocale( LC_ALL, $language );
 
 	// Set the text domain as 'messages'
 	$domain = 'messages';
-	bindtextdomain( $domain, "/home/didier/public/collection/po" );
-	textdomain( $domain );
+	T_bindtextdomain( $domain, APPLICATION_PATH . "/locale" );
+	T_bind_textdomain_codeset( $domain, 'UTF-8' );
+	T_textdomain( $domain );
 	ob_start();
 ?>
 
@@ -69,17 +70,18 @@
 	<script type="text/javascript" src="js/idrag.js"></script>
 	<script type="text/javascript">
 		$(document).ready( function() {
-			init( true );
-			modifyRef();
 			collection = 0;
 			sortBy = '<?php echo 'title';?>';
 			defaultSortBy = '<?php echo 'title';?>';
-			searchDefault = '<?php echo gettext( 'Search a video' );?>';
-			collectionErrorStr = '<?php echo gettext( 'Error reported when trying to get collection %collection' );?>';
-			itemErrorStr = '<?php echo gettext( 'Error reported when trying to get details about item %item on collection %collection' );?>';
-			searchErrorStr = '<?php echo gettext( 'Error reported when trying to search "%target" on collection %collection' );?>';
-			searchTitle = '<?php echo gettext( 'Search' );?>';
-			detailsTitle = '<?php echo gettext( 'Details' );?>';
+			searchDefault = '<?php echo i18n2html( 'Search a video' );?>';
+			collectionErrorStr = '<?php echo i18n2html( 'Error reported when trying to get collection %collection' );?>';
+			itemErrorStr = '<?php echo i18n2html( 'Error reported when trying to get details about item %item on collection %collection' );?>';
+			searchErrorStr = '<?php echo i18n2html( 'Error reported when trying to search "%target" on collection %collection' );?>';
+			searchTitle = '<?php echo i18n2html( 'Search' );?>';
+			detailsTitle = '<?php echo i18n2html( 'Details' );?>';
+			lang = '<?php echo $language;?>';
+			init( true );
+			modifyRef();
 			<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
 				bindTab( '<?php echo $id;?>' );
 			<?php endforeach;?>
@@ -90,32 +92,32 @@
 </head>
 <body>
 	<noscript>
-		<div class="noscript"><?php echo gettext( 'Pour une utilisation optimale, vous devez activer les scripts Javascript.' );?>
+		<div class="noscript"><?php echo i18n2html( 'You must activate javascript for an optimal using.' );?>
 		</div>
 	</noscript>
 	<header>
 		<span class="logo" id="logo-top"></span>
 		<hgroup>
 			<h1>Collection</h1>
-			<h2><?php echo gettext( 'Video' );?></h2>
+			<h2><?php echo i18n2html( 'Video' );?></h2>
 		</hgroup>
 		<form id="search-box" method="GET" target="index.php">
 			<input type="text" id="search-text" value="" name="search">
-			<input type="submit" value="Chercher" id="search-btn">
+			<input type="submit" value="<?php echo i18n2html( 'Search' );?>" id="search-btn">
 			<input type="hidden" name="query" value="search" class="input-hidden">
 			<input type="hidden" name="collection" value="<?php echo $_SESSION['collection'];?>" class="input-hidden">
 		</form>
 	</header>
 	<nav>
 		<?php foreach( $COLLECTIONS as $id => $collection_settings ):?>
-		<a href="index.php?query=collection&amp;collection=<?php echo $id;?>" class="tab<?php if( $id == $_SESSION['collection'] ) echo " current-tab";?>" id="tab-<?php echo $id;?>">
+		<a href="index.php?query=collection&amp;collection=<?php echo $id;?>&amp;lang=<?php echo $language;?>" class="tab<?php if( $id == $_SESSION['collection'] ) echo " current-tab";?>" id="tab-<?php echo $id;?>">
 			<span id="icon-<?php echo $id;?>" class="icon icon-video"></span><?php echo htmlentities( $collection_settings['title'] );?>
 		</a>
 		<?php endforeach;?>
 	</nav>
 	<div id="popup">
 		<p>
-			<span id="popup-title"><?php echo gettext( 'Details' );?></span>
+			<span id="popup-title"><?php echo i18n2html( 'Details' );?></span>
 			<span class="right">
 				<span class="icon icon-move"></span>
 				<span class="icon icon-close"></span>
