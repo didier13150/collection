@@ -43,6 +43,42 @@
 		return $SIZE_OF_THUMBNAILS[$thumb_size]['height'];
 	}
 
+	function getAllCombinations( $target )
+	{
+		$combinations = array();
+
+		$worlds = preg_split( "/\s+/", $target, -1, PREG_SPLIT_NO_EMPTY );
+		$count = count($worlds);
+		$possibilities = pow($count, $count);
+
+		$cpt = 0;
+
+		for( $i = 0; $i < $possibilities; $i++ )
+		{
+			$sameLenght = base_convert( $i, 10, $count );
+			while ( strlen( $sameLenght ) < $count )
+			{
+				$sameLenght = '0'.$sameLenght;
+			}
+			$id = str_split( $sameLenght );
+
+			if ( $id == array_unique( $id ) )
+			{
+				$possibility = '';
+				foreach ( $id as $item )
+				{
+					if( $possibility != '' )
+					{
+						$possibility .= ' ';
+					}
+					$possibility .= $worlds[$item];
+				}
+				$combinations[] = $possibility;
+			}
+		}
+		return $combinations;
+	}
+
 	function i18n2html( $text )
 	{
 		return preg_replace( '/\'/', '\\\'', T_( $text ) );

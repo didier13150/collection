@@ -96,40 +96,22 @@
 	$collection->sort( $sort );
 	$items = $collection->getItems();
 	$occurencies = array();
-	$regex = getRegex( removeAccents( $search ) );
-	/*
-	$hits = array();
-	$searches = preg_split( "/\s+/", $search, -1, PREG_SPLIT_NO_EMPTY );
-	$nbOfWorld = str_word_count( $search );
 
-	foreach( $items as $item )
+	$combinations = getAllCombinations( $search );
+	foreach( $combinations as $combination )
 	{
-		for( $i = 0 ; $i < $nbOfWorld ; $i++ )
+		$regex = getRegex( removeAccents( $combination ) );
+
+		foreach( $items as $item )
 		{
 			if ( preg_match( "/$regex/i", removeAccents( $item->title ) ) )
 			{
-				$hits[$i][] = $item;
+				$occurencies[] = $item;
 			}
-		}
-	}
-
-	for( $i = 0 ; $i < ( $nbOfWorld - 1 ) ; $i++ )
-	{
-		$occurencies = array_intersect( $hits[$i], $hits[$i+1] );
-	}
-	if ( $nbOfWorld == 1 )
-	{
-		$occurencies = $hits[0];
-	}*/
-	foreach( $items as $item )
-	{
-		if ( preg_match( "/$regex/i", removeAccents( $item->title ) ) )
-		{
-			$occurencies[] = $item;
-		}
-		elseif ( preg_match( "/$regex/i", removeAccents( $item->originalTitle ) ) )
-		{
-			$occurencies[] = $item;
+			elseif ( preg_match( "/$regex/i", removeAccents( $item->originalTitle ) ) )
+			{
+				$occurencies[] = $item;
+			}
 		}
 	}
 
