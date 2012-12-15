@@ -122,7 +122,7 @@ footer p{
 }
 
 article {
-	padding:0;
+	padding:0 0 0 22px;
 	clear:both;
 	display:block;
 	margin:0 0;
