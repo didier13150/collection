@@ -1,11 +1,12 @@
 <?php
-class Item
+abstract class Item
 {
 	public $id;
 	public $thumbnail;
 	public $title;
 	public $rating = 0;
 	public $_isInit = false;
+	public $type = null;
 
 	public function getThumbnail( $thumb_size )
 	{
@@ -30,7 +31,7 @@ class Item
 	}
 }
 
-class VideoItem extends Item
+abstract class VideoItem extends Item
 {
 	public $synopsis;
 	public $actors = array();

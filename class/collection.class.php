@@ -191,6 +191,7 @@ class SeriesCollection extends Collection
 		$id = $itemXML['id'];
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new SeriesItem();
+		$item->type = 'series';
 		$item->id = intval( $itemXML['id'] );
 		$item->title = $itemXML['series'] . ' - saison ' . $itemXML['season'];
 		$item->synopsis = $itemXML->synopsis;
@@ -274,6 +275,7 @@ class FilmsCollection extends Collection
 		$id = $itemXML['id'];
 		if ( ! isset( $id ) or empty( $id ) ) return null;
 		$item = new FilmItem();
+		$item->type = 'film';
 		$item->id = intval( $itemXML['id'] );
 		$item->title = $itemXML['title'];
 		if ( $item->title == "" )
