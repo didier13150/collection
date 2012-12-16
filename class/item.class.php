@@ -38,6 +38,16 @@ abstract class VideoItem extends Item
 
 	public function getJoinActorList()
 	{
+		return $this->_getActor( ', ' );
+	}
+
+	public function getActorList()
+	{
+		return $this->_getActor();
+	}
+
+	protected function _getActor( $join = false )
+	{
 		$list = array();
 		foreach( $this->actors as $actors )
 		{
@@ -48,7 +58,11 @@ abstract class VideoItem extends Item
 			}
 			$list[] = $data;
 		}
-		return implode( ', ', $list);
+		if ( $join )
+		{
+			return implode( $join, $list);
+		}
+		return $list;
 	}
 }
 
