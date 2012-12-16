@@ -143,7 +143,7 @@
 	</div>
 </form>
 <script>
-	$('#popup-title').html( '<?php echo htmlentities( $item->title );?>' );
+	$('#popup-title').html( 'Collection - ' + detailsTitle + ' - ' + '<?php echo htmlentities( $item->title );?>' );
 </script>
 <?php
 	$html = ob_get_clean();
