@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-16 11:00+0100\n"
+"POT-Creation-Date: 2012-12-16 11:54+0100\n"
 "PO-Revision-Date: 2012-12-16 10:59+0100\n"
 "Last-Translator: Didier Fabert <didier.fabert@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -142,15 +142,15 @@ msgstr "Vidéo"
 msgid "Nothing to search !!!"
 msgstr "Rien à chercher !!!"
 
-#: search.php:167
+#: search.php:170
 msgid "No item match the query !"
 msgstr "Aucun élément ne correspond aux critères de recherche"
 
-#: search.php:176
+#: search.php:179
 msgid "hit"
 msgstr "occurrence"
 
-#: search.php:176
+#: search.php:179
 msgid "hits"
 msgstr "occurrences"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-14 18:11+0100\n"
+"POT-Creation-Date: 2012-12-16 11:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,7 +126,7 @@ msgid "Details"
 msgstr ""
 
 #: index.php:95
-msgid "You must activate javascript for an optimal using."
+msgid "You must enable javascript for full fonctionalities."
 msgstr ""
 
 #: index.php:102
@@ -137,6 +137,14 @@ msgstr ""
 msgid "Nothing to search !!!"
 msgstr ""
 
-#: search.php:159
+#: search.php:170
 msgid "No item match the query !"
+msgstr ""
+
+#: search.php:179
+msgid "hit"
+msgstr ""
+
+#: search.php:179
+msgid "hits"
 msgstr ""
