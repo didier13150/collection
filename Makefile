@@ -1,5 +1,5 @@
 LOCALE := locale
-POT := collection.pot
+POT := collection
 PO := messages
 
 all: locales mo
@@ -24,10 +24,11 @@ merge: extract
 			mv $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po $(LOCALE)/$$lang/LC_MESSAGES/old.po; \
 			echo -ne "\t$$lang "; \
 			msgmerge $(LOCALE)/$$lang/LC_MESSAGES/old.po $(POT).pot -o $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po ; \
-			rm $(LOCALE)/$$lang/LC_MESSAGES/old.po; \
+			rm -f $(LOCALE)/$$lang/LC_MESSAGES/old.po; \
 			echo -ne "\t\t";\
 			msgfmt --statistics $(LOCALE)/$$lang/LC_MESSAGES/$(PO).po; \
 		fi ; \
+		rm -f *.mo;\
 	done
 
 info:
