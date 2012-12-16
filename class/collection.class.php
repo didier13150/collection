@@ -282,7 +282,14 @@ class FilmsCollection extends Collection
 		{
 			$item->title = $itemXML['name'];
 		}
-		$item->originalTitle = $itemXML['original'];
+		if ( $itemXML['original'] != '' )
+		{
+			$item->originalTitle = $itemXML['original'];
+		}
+		else
+		{
+			$item->originalTitle = $itemXML['title'];
+		}
 		$item->thumbnail = $this->_thumbs_dir . '/' . basename( $itemXML['image'] );
 		$item->year = FilmItem::getYearFromDate( $itemXML['date'] );
 		$item->duration = FilmItem::getDuration( $itemXML['time'] );

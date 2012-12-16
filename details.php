@@ -99,7 +99,7 @@
 		<label for="detail-title" class="fixed-length"><?php echo i18n2html( 'Title' );?></label>
 		<input type="text" id="detail-title" value="<?php echo htmlentities( $item->title );?>">
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'film' ):?>
-			<?php if( $item->originalTitle != "" ):?>
+			<?php if( $item->originalTitle != "" and $item->originalTitle != $item->title ):?>
 			<label for="detail-orig-title" class="fixed-length"><?php echo i18n2html( 'Original Title' );?></label>
 			<input type="text" id="detail-orig-title" value="<?php echo htmlentities( $item->originalTitle );?>">
 			<?php endif;?>
