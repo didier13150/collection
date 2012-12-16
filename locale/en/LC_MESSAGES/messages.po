@@ -118,6 +118,14 @@ msgstr ""
 msgid "Nothing to search !!!"
 msgstr ""
 
-#: search.php:159
+#: search.php:167
 msgid "No item match the query !"
+msgstr ""
+
+#: search.php:176
+msgid "hit"
+msgstr ""
+
+#: search.php:176
+msgid "hits"
 msgstr ""

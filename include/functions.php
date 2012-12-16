@@ -43,7 +43,7 @@
 		return $SIZE_OF_THUMBNAILS[$thumb_size]['height'];
 	}
 
-	function getAllCombinations( $target )
+	function getAllCombinations( $target, $join = ' ' )
 	{
 		$combinations = array();
 
@@ -69,7 +69,7 @@
 				{
 					if( $possibility != '' )
 					{
-						$possibility .= ' ';
+						$possibility .= $join;
 					}
 					$possibility .= $worlds[$item];
 				}

@@ -106,18 +106,44 @@
 		{
 			if ( preg_match( "/$regex/i", removeAccents( $item->title ) ) )
 			{
-				$occurencies[] = $item;
+				$occurencies[$item->id] = $item;
 			}
-			elseif ( preg_match( "/$regex/i", removeAccents( $item->originalTitle ) ) )
+			if ( $item->type == 'film' )
 			{
-				$occurencies[] = $item;
+				if ( preg_match( "/$regex/i", removeAccents( $item->originalTitle ) ) )
+				{
+					$occurencies[$item->id] = $item;
+				}
+				elseif ( preg_match( "/$regex/i", removeAccents( $item->getJoinActorList() ) ) )
+				{
+					$occurencies[$item->id] = $item;
+				}
+				elseif ( preg_match( "/$regex/i", removeAccents( $item->country ) ) )
+				{
+					$occurencies[$item->id] = $item;
+				}
+				elseif ( preg_match( "/$regex/i", removeAccents( $item->director ) ) )
+				{
+					$occurencies[$item->id] = $item;
+				}
+			}
+			elseif ( $item->type == 'series' )
+			{
+				foreach( $item->getEpisodeList() as $episode )
+				{
+					if ( preg_match( "/$regex/i", removeAccents( $episode ) ) )
+					{
+						$occurencies[$item->id] = $item;
+					}
+				}
 			}
 		}
 	}
+	$result = count( $occurencies );
 
 ?>
 <form class="big">
-<?php if( count( $occurencies ) ):?>
+<?php if( $result ):?>
 	<ul class="search">
 	<?php foreach( $occurencies as $item ):?>
 		<li class="search">
@@ -147,6 +173,8 @@
 	<?php foreach( $occurencies as $item ):?>
 		bindItem( '<?php echo $item->id;?>' );
 	<?php endforeach;?>
+	<?php if ( $result == 1 ) $world = i18n2html( 'hit' ); else $world = i18n2html( 'hits' );?>
+	$('#popup-title').html( 'Collection - ' + searchTitle + ' - ' + '<?php echo "$result $world";?>' );
 </script>
 <?php
 	$html = ob_get_clean();
