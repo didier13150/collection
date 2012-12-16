@@ -114,17 +114,20 @@
 				{
 					$occurencies[$item->id] = $item;
 				}
-				elseif ( preg_match( "/$regex/i", removeAccents( $item->getJoinActorList() ) ) )
+				elseif ( preg_match( "/$search/i", removeAccents( $item->country ) ) )
 				{
 					$occurencies[$item->id] = $item;
 				}
-				elseif ( preg_match( "/$regex/i", removeAccents( $item->country ) ) )
+				elseif ( preg_match( "/$search/i", removeAccents( $item->director ) ) )
 				{
 					$occurencies[$item->id] = $item;
 				}
-				elseif ( preg_match( "/$regex/i", removeAccents( $item->director ) ) )
+				foreach( $item->getActorList() as $actor )
 				{
-					$occurencies[$item->id] = $item;
+					if ( preg_match( "/$search/i", removeAccents( $actor ) ) )
+					{
+						$occurencies[$item->id] = $item;
+					}
 				}
 			}
 			elseif ( $item->type == 'series' )
