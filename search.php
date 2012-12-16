@@ -101,6 +101,7 @@
 	foreach( $combinations as $combination )
 	{
 		$regex = getRegex( removeAccents( $combination ) );
+		$regexFull = getRegex( removeAccents( $combination ), true );
 
 		foreach( $items as $item )
 		{
@@ -114,17 +115,17 @@
 				{
 					$occurencies[$item->id] = $item;
 				}
-				elseif ( preg_match( "/$search/i", removeAccents( $item->country ) ) )
+				elseif ( preg_match( "/$regexFull/i", removeAccents( $item->country ) ) )
 				{
 					$occurencies[$item->id] = $item;
 				}
-				elseif ( preg_match( "/$search/i", removeAccents( $item->director ) ) )
+				elseif ( preg_match( "/$regexFull/i", removeAccents( $item->director ) ) )
 				{
 					$occurencies[$item->id] = $item;
 				}
 				foreach( $item->getActorList() as $actor )
 				{
-					if ( preg_match( "/$search/i", removeAccents( $actor ) ) )
+					if ( preg_match( "/$regexFull/i", removeAccents( $actor ) ) )
 					{
 						$occurencies[$item->id] = $item;
 					}
@@ -143,7 +144,6 @@
 		}
 	}
 	$result = count( $occurencies );
-
 ?>
 <form class="big">
 <?php if( $result ):?>
