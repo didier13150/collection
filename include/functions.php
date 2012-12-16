@@ -11,9 +11,13 @@
 		return $str;
 	}
 
-	function getRegex( $str )
+	function getRegex( $str, $full = false )
 	{
 		$worlds = preg_split( "/\s+/", $str, -1, PREG_SPLIT_NO_EMPTY );
+		if ( $full )
+		{
+			return join( '.*', $worlds );
+		}
 		$regex = array();
 		foreach( $worlds as $world )
 		{
