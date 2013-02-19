@@ -39,13 +39,6 @@ function init( full ) {
 				$('#search-text').val( '' );
 			}
 		);
-		$('#search-text').bind(
-			'focusout',
-			function() {
-				$('#search-text').css( 'color', 'lightgrey' );
-				$('#search-text').val( searchDefault );
-			}
-		);
 		resizeArticle();
 		posPopup();
 	}
@@ -183,6 +176,8 @@ function search()
 		arg += '&sort=' + sortBy;
 	}
 	arg += '&lang=' + lang;
+	$('#search-text').css( 'color', 'lightgrey' );
+	$('#search-text').val( searchDefault );
 	$.ajax({
 		url: 'search.php' + arg,
 		success: function( data ) {
