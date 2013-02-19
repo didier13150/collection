@@ -132,7 +132,7 @@
 		<div class="synopsis"><?php echo i18n2html( 'Actors' );?>: <?php echo $item->getJoinActorList();?></div>
 		<?php endif;?>
 		<?php if( $COLLECTIONS[$collectionID]['type'] == 'series' ):?>
-			<div class="synopsis"><?php echo i18n2html( 'Series episode list' );?>Liste des &eacute;pisodes
+			<div class="synopsis"><?php echo i18n2html( 'Series episode list' );?>
 				<ul class="episode">
 				<?php foreach( $item->getEpisodeList() as $episode ):?>
 					<li class="episode"><?php echo $episode;?></li>
