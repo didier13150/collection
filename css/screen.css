@@ -86,6 +86,7 @@ header h1, header h2, header h3, footer, nav a.current-tab, .button {
 header h1, header h2, header h3 {
 	background-color:transparent;
 	border-width:0;
+	text-shadow:0.1em 0.1em 0.2em black;
 }
 
 header h1 {
@@ -374,6 +375,7 @@ form input {
 	font-size:1.3em;
 	font-weight:bold;
 	border: 1px solid LemonChiffon ;
+	text-shadow:0.1em 0.1em 0.2em black;
 }
 
 span.icon, span.minicon {
@@ -556,7 +558,7 @@ form#search-box {
 form#search-box input[type="text"] {
 	border-radius: 4px 0 0 4px;
 	width: 200px;
-	height: 20px;
+	height: 18px;
 	margin: 0;
 	border-top: lightgrey 1px solid;
 	border-left: lightgrey 1px solid;
@@ -568,7 +570,7 @@ form#search-box input[type="text"] {
 }
 
 form#search-box input[type="submit"], select {
-	height: 22px;
+	height: 20px;
 	line-height:16px;
 	background-image:url("../img/bg-item.png");
 	background-repeat:repeat-x;
@@ -579,6 +581,7 @@ form#search-box input[type="submit"], select {
 
 form#search-box input[type="submit"] {
 	width: 100px;
+	height:100%;
 	border-radius: 0 4px 4px 0;
 	border-top: lightgrey 1px solid;
 	border-right: lightsteelblue 1px solid;
@@ -586,6 +589,7 @@ form#search-box input[type="submit"] {
 	border-left: lightgrey 1px solid;
 	background-color:lightsteelblue;
 	color:black;
+	text-shadow:0.1em 0.1em 0.2em LemonChiffon;
 }
 
 select {
